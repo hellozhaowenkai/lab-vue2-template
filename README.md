@@ -1,5 +1,30 @@
 # lab-vue2-demo
 
+## Description
+
+Opinionated Vue2 Starter Template
+
+## Docker
+
+### Build image
+
+```bash
+docker build --tag lab-vue2-demo:latest .
+```
+
+### Run container
+
+```bash
+docker container run \
+  --name lab-vue2-demo \
+  --publish 10202:80 \
+  --env TZ=Asia/Shanghai \
+  --interactive \
+  --detach \
+  --restart unless-stopped \
+  lab-vue2-demo:latest
+```
+
 ## Project setup
 
 ```
