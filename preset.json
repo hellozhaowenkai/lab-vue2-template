@@ -13,5 +13,5 @@
     "@vue/cli-plugin-unit-jest": {}
   },
   "vueVersion": "2",
-  "cssPreprocessor": "node-sass"
+  "cssPreprocessor": "dart-sass"
 }
