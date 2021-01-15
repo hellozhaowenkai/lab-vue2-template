@@ -8,7 +8,11 @@ WORKDIR /app
 COPY package*.json ./
 
 # install project dependencies
-RUN npm --registry=https://registry.npm.taobao.org install
+RUN npm --registry=https://registry.npm.taobao.org \
+  --cache=$HOME/.npm/.cache/cnpm \
+  --disturl=https://npm.taobao.org/dist \
+  --userconfig=$HOME/.cnpmrc \
+  install
 
 # copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .

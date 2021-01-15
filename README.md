@@ -25,6 +25,10 @@ docker container run \
   lab-vue2-demo:latest
 ```
 
+## Git LFS
+
+See [Git Large File Storage](https://git-lfs.github.com/).
+
 ## Project setup
 
 ```
