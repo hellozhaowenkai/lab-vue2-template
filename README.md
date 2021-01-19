@@ -18,6 +18,7 @@ docker build --tag lab-vue2-demo:latest .
 docker container run \
   --name lab-vue2-demo \
   --publish 10202:80 \
+  --volume $(pwd)/logs:/var/log/nginx \
   --env TZ=Asia/Shanghai \
   --interactive \
   --detach \
