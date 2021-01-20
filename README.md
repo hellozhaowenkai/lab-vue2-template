@@ -26,6 +26,13 @@ docker container run \
   lab-vue2-demo:latest
 ```
 
+### Delete container & image
+
+```bash
+docker container rm -f lab-vue2-demo
+docker image rm lab-vue2-demo:latest
+```
+
 ## Git LFS
 
 See [Git Large File Storage](https://git-lfs.github.com/).
