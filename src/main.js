@@ -4,6 +4,7 @@ import router from "@/router";
 import store from "@/store";
 
 import "@/plugins/axios";
+import "normalize.css/normalize.css";
 
 Vue.config.productionTip = false;
 
