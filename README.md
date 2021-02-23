@@ -9,13 +9,14 @@ Opinionated Vue2 Starter Template
 ### Build image
 
 ```bash
-docker build --tag lab-vue2-demo:latest .
+docker image build --tag lab-vue2-demo:latest .
 ```
 
 ### Run container
 
 ```bash
 docker container run \
+  --user $(id -u) \
   --name lab-vue2-demo \
   --publish 10202:80 \
   --volume $(pwd)/logs:/var/log/nginx \
