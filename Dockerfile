@@ -8,27 +8,40 @@ WORKDIR /app
 COPY package*.json ./
 
 # install project dependencies
-RUN npm \
-  --registry https://registry.npm.taobao.org/ \
-  --cache $HOME/.npm/.cache/cnpm/ \
-  --disturl https://npm.taobao.org/dist/ \
-  --userconfig $HOME/.cnpmrc \
-  install
+RUN echo "START." \
+  && npm \
+    --registry=https://registry.npm.taobao.org/ \
+    --cache=$HOME/.npm/.cache/cnpm/ \
+    --disturl=https://npm.taobao.org/dist/ \
+    --userconfig=$HOME/.cnpmrc \
+    install \
+  && echo "END."
 
 # copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
 
 # build app for production with minification
-RUN npm run build
+RUN echo "START." \
+  && npm run build \
+  && echo "END."
 
 # production stage
 FROM nginx:stable-alpine as production-stage
 
+# set timezone
+ENV TZ=Asia/Shanghai
+
+# make the 'app' folder the current working directory
+WORKDIR /app
+
 # copy static files to nginx html directory
-COPY --from build-stage /app/dist/* /usr/share/nginx/html/
+COPY --from=build-stage /app/dist /app/html
 
 # the container listens on the specified network ports at runtime
-EXPOSE 80
+EXPOSE 8888
 
 # run Nginx server in foreground
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+# run Nginx server in `/app` prefix path
+CMD ["-p", "/app", "-c", "/etc/nginx/nginx.conf"]

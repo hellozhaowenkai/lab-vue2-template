@@ -4,27 +4,41 @@
 
 Opinionated Vue2 Starter Template
 
+## Quickstart
+
+### Get repository
+
+```bash
+git clone --recursive https://github.com/hellozhaowenkai/lab-vue2-demo.git
+```
+
 ## Docker
 
 ### Build image
 
 ```bash
-docker image build --tag lab-vue2-demo:latest .
+docker image build --tag=lab-vue2-demo:latest .
 ```
 
 ### Run container
 
 ```bash
 docker container run \
-  --user $(id -u) \
-  --name lab-vue2-demo \
-  --publish 10202:80 \
-  --volume $(pwd)/logs:/var/log/nginx \
-  --env TZ=Asia/Shanghai \
+  --user=$(id -u) \
+  --name=lab-vue2-demo \
+  --publish=10202:8888 \
+  --volume=$(pwd)/logs:/app/logs \
+  --volume=$(pwd)/nginx.conf:/etc/nginx/nginx.conf \
+  --restart=on-failure:3 \
   --interactive \
   --detach \
-  --restart unless-stopped \
   lab-vue2-demo:latest
+```
+
+### Restart container
+
+```bash
+docker container restart lab-vue2-demo
 ```
 
 ### Delete container & image
@@ -32,6 +46,12 @@ docker container run \
 ```bash
 docker container rm -f lab-vue2-demo
 docker image rm lab-vue2-demo:latest
+```
+
+### View logs
+
+```bash
+docker container logs lab-vue2-demo
 ```
 
 ## Git LFS
