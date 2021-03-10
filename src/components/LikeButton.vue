@@ -3,7 +3,12 @@
 <template>
   <div class="main-content">
     <div>
-      <input type="checkbox" id="checkbox" />
+      <input
+        type="checkbox"
+        id="checkbox"
+        v-model="isLiked"
+        @change="likeHandler"
+      />
       <label for="checkbox">
         <svg
           id="heart-svg"
@@ -78,6 +83,23 @@
 <script>
 export default {
   name: "LikeButton",
+
+  props: {
+    initLikeStatus: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  data() {
+    return { isLiked: this.initLikeStatus };
+  },
+
+  methods: {
+    likeHandler() {
+      this.$emit("likeStatusChange", this.isLiked);
+    },
+  },
 };
 </script>
 

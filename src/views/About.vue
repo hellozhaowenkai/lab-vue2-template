@@ -1,17 +1,49 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <LikeButton />
+    <LikeButton
+      :initLikeStatus="initLikeStatus"
+      @likeStatusChange="likeStatusChange"
+    />
   </div>
 </template>
 
 <script>
 import LikeButton from "@/components/LikeButton";
+import { APILike } from "@/api/lab-django-demo";
 
 export default {
   name: "About",
 
   components: { LikeButton },
+
+  data() {
+    return {
+      initLikeStatus: false,
+    };
+  },
+
+  methods: {
+    likeStatusChange(isLiked) {
+      const lastAddBy = isLiked ? 1 : -1;
+      const apiLike = new APILike();
+      apiLike.pk = 1;
+      apiLike.fields = { lastAddBy };
+      apiLike
+        // .fetchList()
+        // .fetchDetail()
+        // .create()
+        // .update()
+        .update_or_create()
+        // .drop()
+        .then((data) => {
+          console.log("data", data);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    },
+  },
 };
 </script>
 
