@@ -16,12 +16,25 @@ module.exports = {
       warnings: false,
       errors: true,
     },
+
+    // https://cli.vuejs.org/config/#devserver
+    // https://webpack.js.org/configuration/dev-server/#devserverproxy
+    // https://github.com/chimurai/http-proxy-middleware
     proxy: {
-      "/api/": {
-        target: "http://localhost:8000/",
+      "^/i-need-a-proxy/": {
+        target: "https://lailai.link/api/",
         changeOrigin: true,
-        pathRewrite: {
-          "^/api": "",
+        // bypass(request, response, proxyOptions) {
+        //   console.log(`capturing ${request.url}`);
+        // },
+        pathRewrite(path, request) {
+          // console.log(`rewriting ${request.url}`);
+
+          const ruler = { "^/i-need-a-proxy/": "/" };
+          let newPath = path;
+          for (const [key, value] of Object.entries(ruler))
+            newPath = newPath.replace(new RegExp(key), value);
+          return newPath;
         },
       },
     },

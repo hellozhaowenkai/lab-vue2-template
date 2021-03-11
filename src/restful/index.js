@@ -3,8 +3,6 @@ import axios from "axios";
 // Full config:  https://github.com/axios/axios#request-config
 // Global axios defaults
 // axios.defaults.baseURL = "https://api.example.com";
-// Important: If axios is used with multiple domains, the AUTH_TOKEN will be sent to all of them.
-// See below for an example using Custom instance defaults instead.
 // axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
 // axios.defaults.headers.post["Content-Type"] =
 //   "application/x-www-form-urlencoded";
@@ -57,7 +55,7 @@ import axios from "axios";
 // );
 
 export const APIModel = class {
-  static handler = axios;
+  static axios = axios;
   static prefix = "models";
   static fieldsMap = [
     // ["frontEndField", "back_end_field"],
@@ -96,11 +94,26 @@ export const APIModel = class {
     return originData;
   }
 
+  static pathResolver(...routes) {
+    routes = routes.flat(Infinity);
+
+    const separator = "/";
+    const protocolFound = routes[0].match(/^([a-z][a-z\d+\-.]*:)?\/\//gi);
+    const protocol = protocolFound ? protocolFound[0] : separator;
+    const normalizedPath = routes
+      .join(separator)
+      .replace(new RegExp(`^(${protocol})+(${separator}*)`), "")
+      .replace(new RegExp(`${separator}{2,}`, "g"), separator)
+      .replace(new RegExp(`(?<!${separator})$`), separator);
+
+    return protocol + normalizedPath;
+  }
   static request(config) {
     return new Promise((resolve, reject) => {
       config.data = this.transformData(config.data, false);
-      this.handler(config)
+      this.axios(config)
         .then((response) => {
+          // console.log("AxiosResponse", response);
           const data = this.transformData(response.data, true);
           if (data.error) reject(data.error.message);
           else resolve(data);
@@ -120,7 +133,7 @@ export const APIModel = class {
   async fetchList(orderBy = "pk", pageSize = 100, pageNumber = 1) {
     return this.constructor.request({
       method: "get",
-      url: `/${this.constructor.prefix}/`,
+      url: this.constructor.pathResolver(this.constructor.prefix),
       params: {
         order_by: orderBy,
         page_size: pageSize,
@@ -132,14 +145,14 @@ export const APIModel = class {
   async fetchDetail() {
     return this.constructor.request({
       method: "get",
-      url: `/${this.constructor.prefix}/${this.pk}/`,
+      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
     });
   }
 
   async create() {
     return this.constructor.request({
       method: "post",
-      url: `/${this.constructor.prefix}/${this.pk}/`,
+      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
       data: this.fields,
     });
   }
@@ -147,7 +160,7 @@ export const APIModel = class {
   async update() {
     return this.constructor.request({
       method: "patch",
-      url: `/${this.constructor.prefix}/${this.pk}/`,
+      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
       data: this.fields,
     });
   }
@@ -155,7 +168,7 @@ export const APIModel = class {
   async update_or_create() {
     return this.constructor.request({
       method: "put",
-      url: `/${this.constructor.prefix}/${this.pk}/`,
+      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
       data: this.fields,
     });
   }
@@ -163,7 +176,7 @@ export const APIModel = class {
   async drop() {
     return this.constructor.request({
       method: "delete",
-      url: `/${this.constructor.prefix}/${this.pk}/`,
+      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
     });
   }
 };

@@ -1,11 +1,41 @@
 import { APIModel } from "@/restful";
 
+const apiConfig = {
+  production: {
+    host: "https://lailai.link/api/",
+    prefix: "django-demo",
+  },
+  development: {
+    host: "i-need-a-proxy",
+    prefix: "django-demo",
+  },
+  test: {
+    host: "http://localhost:8000/",
+    prefix: "",
+  },
+  mock: {
+    host: "https://mockapi.eolinker.com/",
+    prefix: "kmLrhCWd76af7b0fc53533d8254c024f3b3b9d0e2e73d0b",
+  },
+};
+
+// const devFlag = "production";
+const devFlag = "development";
+// const devFlag = "test";
+// const devFlag = "mock";
+
+const baseAPIConfig =
+  process.env.NODE_ENV === "production"
+    ? apiConfig["production"]
+    : apiConfig[devFlag];
+
 // Full config:  https://github.com/axios/axios#request-config
 // Custom instance defaults
 // Set config defaults when creating the instance
-const axiosInstance = APIModel.handler.create({
-  baseURL: "https://lailai.link/api/" + "django-demo",
+const axiosInstance = APIModel.axios.create({
+  baseURL: APIModel.pathResolver(baseAPIConfig.host, baseAPIConfig.prefix),
 });
+
 // Alter defaults after instance has been created
 // axiosInstance.defaults.headers.common["Authorization"] = AUTH_TOKEN;
 
@@ -36,7 +66,7 @@ const axiosInstance = APIModel.handler.create({
 // );
 
 export const APILike = class extends APIModel {
-  static handler = axiosInstance;
+  static axios = axiosInstance;
   static prefix = "likes";
   static fieldsMap = [
     ["totalCount", "total_count"],
