@@ -69,6 +69,7 @@ export const APILike = class extends APIModel {
   static axios = axiosInstance;
   static prefix = "likes";
   static fieldsMap = [
+    // ["frontEndField", "back_end_field"],
     ["totalCount", "total_count"],
     ["lastAddBy", "last_add_by"],
     ["lastModifiedBy", "last_modified_by"],
@@ -76,7 +77,7 @@ export const APILike = class extends APIModel {
     ...super.fieldsMap,
   ];
 
-  constructor(pk = 0, fields = null) {
+  constructor(pk = 0, fields = {}) {
     super(pk, fields);
   }
 };

@@ -65,28 +65,73 @@ export const APIModel = class {
     ["isDeleted", "is_deleted"],
   ];
 
-  static translate(target, reverse = false) {
+  static APIError = class extends Error {
+    constructor(code = 0, message = "") {
+      super(message);
+      this.name = "APIError";
+      this.code = code;
+      this.message = message;
+    }
+  };
+
+  static errorAPIMap = [
+    ["error", "error"],
+    ["code", "code"],
+    ["message", "message"],
+  ];
+  static itemAPIMap = [
+    ["model", "model"],
+    ["pk", "pk"],
+    ["fields", "fields"],
+    ["result", "result"],
+    ...this.errorAPIMap,
+  ];
+  static collectionAPIMap = [
+    ["orderBy", "order_by"],
+    ["size", "size"],
+    ["page", "page"],
+    ["count", "count"],
+    ["perPage", "per_page"],
+    ["numPages", "num_pages"],
+    ["pageRange", "page_range"],
+    ["previous", "previous"],
+    ["current", "current"],
+    ["next", "next"],
+    ["startIndex", "start_index"],
+    ["endIndex", "end_index"],
+    ...this.itemAPIMap,
+  ];
+  static operationAPIMap = [
+    ["createdAt", "created_at"],
+    ["lastActionAt", "last_action_at"],
+    ["percentComplete", "percent_complete"],
+    ["status", "status"],
+    ...this.itemAPIMap,
+  ];
+  static translate(target, dictionary, reverse = false) {
     const [targetIndex, resultIndex] = reverse ? [1, 0] : [0, 1];
-    const result = this.fieldsMap.find(
-      (entry) => entry[targetIndex] === target
-    );
+    const result = dictionary.find((entry) => entry[targetIndex] === target);
     return result && result[resultIndex];
   }
-  static transformData(originData, reverse = false) {
+  static interfaceTranslator(originData, dictionary, reverse = false) {
     const dataType = Object.prototype.toString.call(originData);
 
     if (dataType === "[object Array]") {
       const data = [];
       for (const item of originData)
-        data.push(this.transformData(item, reverse));
+        data.push(this.interfaceTranslator(item, dictionary, reverse));
       return data;
     }
 
     if (dataType === "[object Object]") {
       const data = {};
       for (const [key, value] of Object.entries(originData)) {
-        const translatedKey = this.translate(key, reverse) || key;
-        data[translatedKey] = this.transformData(value, reverse);
+        const translatedKey = this.translate(key, dictionary, reverse) || key;
+        data[translatedKey] = this.interfaceTranslator(
+          value,
+          dictionary,
+          reverse
+        );
       }
       return data;
     }
@@ -108,14 +153,28 @@ export const APIModel = class {
 
     return protocol + normalizedPath;
   }
-  static request(config) {
+  static request(axiosConfig, { translate = false } = {}) {
     return new Promise((resolve, reject) => {
-      config.data = this.transformData(config.data, false);
-      this.axios(config)
+      if (translate) {
+        axiosConfig.data = this.interfaceTranslator(
+          axiosConfig.data,
+          translate
+        );
+        axiosConfig.params = this.interfaceTranslator(
+          axiosConfig.params,
+          translate
+        );
+      }
+      this.axios(axiosConfig)
         .then((response) => {
           // console.log("AxiosResponse", response);
-          const data = this.transformData(response.data, true);
-          if (data.error) reject(data.error.message);
+
+          const data = translate
+            ? this.interfaceTranslator(response.data, translate, true)
+            : response.data;
+
+          if (data.error)
+            throw new this.APIError(data.error.code, data.error.message);
           else resolve(data);
         })
         .catch((error) => {
@@ -125,58 +184,106 @@ export const APIModel = class {
     });
   }
 
-  constructor(pk = 0, fields = null) {
+  constructor(pk = 0, fields = {}) {
     this.pk = pk;
-    this.fields = fields || {};
-  }
-
-  async fetchList(orderBy = "pk", pageSize = 100, pageNumber = 1) {
-    return this.constructor.request({
-      method: "get",
-      url: this.constructor.pathResolver(this.constructor.prefix),
-      params: {
-        order_by: orderBy,
-        page_size: pageSize,
-        page_number: pageNumber,
-      },
-    });
+    this.fields = fields;
   }
 
   async fetchDetail() {
-    return this.constructor.request({
-      method: "get",
-      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
-    });
+    return this.constructor.request(
+      {
+        method: "GET",
+        url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
+      },
+      {
+        translate: [
+          ...this.constructor.fieldsMap,
+          ...this.constructor.itemAPIMap,
+        ],
+      }
+    );
+  }
+
+  async fetchList(orderBy = "pk", pageSize = 100, pageNumber = 1) {
+    return this.constructor.request(
+      {
+        method: "GET",
+        url: this.constructor.pathResolver(this.constructor.prefix),
+        params: {
+          orderBy,
+          pageSize,
+          pageNumber,
+        },
+      },
+      {
+        translate: [
+          ...this.constructor.fieldsMap,
+          ...this.constructor.collectionAPIMap,
+        ],
+      }
+    );
   }
 
   async create() {
-    return this.constructor.request({
-      method: "post",
-      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
-      data: this.fields,
-    });
+    return this.constructor.request(
+      {
+        method: "POST",
+        url: this.constructor.pathResolver(this.constructor.prefix),
+        data: this.fields,
+      },
+      {
+        translate: [
+          ...this.constructor.fieldsMap,
+          ...this.constructor.operationAPIMap,
+        ],
+      }
+    );
   }
 
   async update() {
-    return this.constructor.request({
-      method: "patch",
-      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
-      data: this.fields,
-    });
+    return this.constructor.request(
+      {
+        method: "PATCH",
+        url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
+        data: this.fields,
+      },
+      {
+        translate: [
+          ...this.constructor.fieldsMap,
+          ...this.constructor.operationAPIMap,
+        ],
+      }
+    );
   }
 
   async update_or_create() {
-    return this.constructor.request({
-      method: "put",
-      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
-      data: this.fields,
-    });
+    return this.constructor.request(
+      {
+        method: "PUT",
+        url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
+        data: this.fields,
+      },
+      {
+        translate: [
+          ...this.constructor.fieldsMap,
+          ...this.constructor.operationAPIMap,
+        ],
+      }
+    );
   }
 
   async drop() {
-    return this.constructor.request({
-      method: "delete",
-      url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
-    });
+    return this.constructor.request(
+      {
+        method: "DELETE",
+        url: this.constructor.pathResolver(this.constructor.prefix, this.pk),
+      },
+      {
+        translate: [
+          ...this.constructor.fieldsMap,
+          ...this.constructor.operationAPIMap,
+        ],
+      }
+    );
   }
 };
