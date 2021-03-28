@@ -58,33 +58,33 @@ docker container logs lab-vue2-demo
 
 See [Git Large File Storage](https://git-lfs.github.com/).
 
-## Project setup
+## Vue project setup
 
-```
+```bash
 npm install
 ```
 
 ### Compiles and hot-reloads for development
 
-```
+```bash
 npm run serve
 ```
 
 ### Compiles and minifies for production
 
-```
+```bash
 npm run build
 ```
 
 ### Run your unit tests
 
-```
+```bash
 npm run test:unit
 ```
 
 ### Lints and fixes files
 
-```
+```bash
 npm run lint
 ```
 
