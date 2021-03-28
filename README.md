@@ -4,6 +4,10 @@
 
 Opinionated Vue2 Starter Template
 
+## Code
+
+`vue2-demo` -> `Vue2 Demo`
+
 ## Quickstart
 
 ### Get repository

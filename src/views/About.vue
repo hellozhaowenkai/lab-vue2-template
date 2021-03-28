@@ -34,7 +34,7 @@ export default {
         // .fetchDetail()
         // .create()
         // .update()
-        .update_or_create()
+        .updateOrCreate()
         // .drop()
         .then((data) => {
           console.log("data", data);

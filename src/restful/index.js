@@ -256,7 +256,7 @@ export const APIModel = class {
     );
   }
 
-  async update_or_create() {
+  async updateOrCreate() {
     return this.constructor.request(
       {
         method: "PUT",
