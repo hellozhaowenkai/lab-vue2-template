@@ -1,0 +1,18 @@
+# [TOML](https://toml.io/)
+
+dirname = "config"
+filename = "settings.toml"
+
+[base]
+project-name = "lab-vue2-demo"
+
+[sensitive-settings]
+enabled = true
+
+[[sensitive-settings.includes]]
+namespace = "secrets"
+filename = "settings.private.sample.toml"
+
+[[sensitive-settings.includes]]
+namespace = "secrets"
+filename = "settings.private.toml"

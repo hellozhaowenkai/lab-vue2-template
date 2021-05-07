@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = {
   publicPath: "./",
 
@@ -9,6 +11,32 @@ module.exports = {
 
   configureWebpack: {
     devtool: "source-map",
+
+    plugins: [
+      new webpack.DefinePlugin({
+        $PROJECT_CONFIG: JSON.stringify(require("./config")),
+      }),
+    ],
+
+    // externals: {
+    //   lodash: {
+    //     commonjs: "lodash",
+    //     amd: "lodash",
+    //     root: "_",
+    //   },
+    // },
+
+    // module: {
+    //   rules: [
+    //     {
+    //       test: /\.toml$/i,
+    //       type: "json",
+    //       parser: {
+    //         parse: toml.parse,
+    //       },
+    //     },
+    //   ],
+    // },
   },
 
   devServer: {

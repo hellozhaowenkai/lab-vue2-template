@@ -8,7 +8,7 @@
 
 # Sensitive files
 *.private.*
-!*.sample.*
+!*.private.sample.*
 
 # Editor directories and files
 .idea

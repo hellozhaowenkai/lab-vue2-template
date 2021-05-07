@@ -1,0 +1,16 @@
+[host]
+username = "<host username>"
+password = "<host password>"
+
+[django]
+secret-key = "<django `SECRET_KEY`>"
+
+[tencent-cloud]
+app-id = "<tencent cloud `APPID`>"
+access.id = "<tencent cloud `SecretID`>"
+access.key = "<tencent cloud `SecretKey`>"
+
+[aliyun]
+role-arn = "<aliyun `Role ARN`>"
+access.id = "<aliyun `AccessKey ID`>"
+access.key = "<aliyun `AccessKey Secret`>"
