@@ -178,7 +178,7 @@ export const APIModel = class {
           else resolve(data);
         })
         .catch((error) => {
-          alert(error);
+          console.error(error);
           reject(error);
         });
     });
