@@ -58,11 +58,24 @@ docker image rm lab-vue2-demo:latest
 docker container logs lab-vue2-demo
 ```
 
+## Checklist
+
+When you use this template, try follow the checklist to update your info properly:
+
+- [ ] Replace all `name` sections in project
+- [ ] Use a new port for docker container when deploying
+- [ ] Clean up the READMEs and update project's descriptions
+- [ ] Change the title in `public/index.html`
+- [ ] Change the favicon in `public`
+- [ ] Remove the `.idea` and `.vscode` folder which contains the editor info
+
+And, enjoy :)
+
 ## Git LFS
 
 See [Git Large File Storage](https://git-lfs.github.com/).
 
-## Vue project setup
+## Vue2 project setup
 
 ```bash
 npm install
