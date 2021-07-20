@@ -1,7 +1,11 @@
 const webpack = require("webpack");
+const $projectConfig = require("./config");
 
 module.exports = {
-  publicPath: "./",
+  publicPath:
+    process.env.NODE_ENV === "production"
+      ? $projectConfig["settings"]["base"]["base-url"]
+      : "/",
 
   productionSourceMap: false,
 
@@ -14,7 +18,7 @@ module.exports = {
 
     plugins: [
       new webpack.DefinePlugin({
-        $PROJECT_CONFIG: JSON.stringify(require("./config")),
+        $PROJECT_CONFIG: JSON.stringify($projectConfig),
       }),
     ],
 

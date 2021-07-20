@@ -64,6 +64,7 @@ When you use this template, try follow the checklist to update your info properl
 
 - [ ] Replace all `name` sections in project
 - [ ] Use a new port for docker container when deploying
+- [ ] Change the `base-url` value in `config/settings.toml`
 - [ ] Clean up the READMEs and update project's descriptions
 - [ ] Change the title in `public/index.html`
 - [ ] Change the favicon in `public`

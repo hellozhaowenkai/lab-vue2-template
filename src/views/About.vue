@@ -44,6 +44,10 @@ export default {
         });
     },
   },
+
+  mounted() {
+    console.log("$projectConfig", this.$projectConfig);
+  },
 };
 </script>
 
