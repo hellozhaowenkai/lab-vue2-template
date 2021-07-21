@@ -33,7 +33,7 @@ docker container run \
   --publish=10202:8888 \
   --volume=$(pwd)/logs:/app/logs \
   --volume=$(pwd)/nginx.conf:/etc/nginx/nginx.conf \
-  --restart=on-failure:3 \
+  --restart=unless-stopped \
   --interactive \
   --detach \
   lab-vue2-demo:latest
@@ -65,6 +65,7 @@ When you use this template, try follow the checklist to update your info properl
 - [ ] Replace all `name` sections in project
 - [ ] Use a new port for docker container when deploying
 - [ ] Change the `base-url` value in `config/settings.toml`
+- [ ] Update the `deploy.sh`
 - [ ] Clean up the READMEs and update project's descriptions
 - [ ] Change the title in `public/index.html`
 - [ ] Change the favicon in `public`
