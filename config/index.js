@@ -1,6 +1,8 @@
+const fs = require("fs");
+const path = require("path");
+
 function myTOMLParser() {
   function tomlParser(filePath) {
-    const fs = require("fs");
     const toml = require("@ltd/j-toml");
 
     const tomlString = String(fs.readFileSync(filePath));
@@ -11,9 +13,6 @@ function myTOMLParser() {
 }
 
 function organizeSettings() {
-  const fs = require("fs");
-  const path = require("path");
-
   const tomlParser = myTOMLParser();
 
   const configPath = path.resolve(__dirname);
@@ -60,4 +59,4 @@ const settings = deepFreeze(organizeSettings());
 // export { settings as default };
 
 // CommonJS Modules
-module.exports = { settings };
+module.exports = settings;

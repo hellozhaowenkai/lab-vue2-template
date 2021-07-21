@@ -4,7 +4,7 @@ const $projectConfig = require("./config");
 module.exports = {
   publicPath:
     process.env.NODE_ENV === "production"
-      ? $projectConfig["settings"]["base"]["base-url"]
+      ? $projectConfig["base"]["base-url"]
       : "/",
 
   productionSourceMap: false,
