@@ -40,7 +40,21 @@ function organizeSettings() {
   return mainSettings;
 }
 
-const settings = Object.freeze(organizeSettings());
+function deepFreeze(object) {
+  // Retrieve the property names defined on object.
+  const propNames = Object.getOwnPropertyNames(object);
+
+  // Freeze properties before freezing self.
+  for (const name of propNames) {
+    const value = object[name];
+    if (value && typeof value === "object") deepFreeze(value);
+  }
+
+  // Freeze self.
+  return Object.freeze(object);
+}
+
+const settings = deepFreeze(organizeSettings());
 
 // ECMAScript Modules
 // export { settings as default };
