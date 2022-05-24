@@ -9,12 +9,11 @@ COPY package*.json ./
 
 # install project dependencies
 RUN echo "START." \
-  && npm \
-    --registry=https://registry.npm.taobao.org/ \
-    --cache=$HOME/.npm/.cache/cnpm/ \
-    --disturl=https://npm.taobao.org/dist/ \
-    --userconfig=$HOME/.cnpmrc \
-    install \
+  && npm install \
+    --userconfig  $HOME/.cnpmrc \
+    --registry    https://registry.npmmirror.com \
+    --cache       $HOME/.npm/.cache/cnpm/ \
+    --disturl=https://npmmirror.com/dist/ \
   && echo "END."
 
 # copy project files and folders to the current working directory (i.e. 'app' folder)
