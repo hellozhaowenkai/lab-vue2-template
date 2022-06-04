@@ -7,6 +7,11 @@ import axios from "axios";
 // axios.defaults.headers.post["Content-Type"] =
 //   "application/x-www-form-urlencoded";
 
+// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token
+axios.defaults.xsrfCookieName = "XSRF-TOKEN"; // default
+// `xsrfHeaderName` is the name of the http header that carries the xsrf token value
+axios.defaults.xsrfHeaderName = "X-XSRF-TOKEN"; // default
+
 // `transformRequest` allows changes to the request data before it is sent to the server
 // This is only applicable for request methods 'PUT', 'POST', 'PATCH' and 'DELETE'
 // The last function in the array must return a string or an instance of Buffer, ArrayBuffer,
