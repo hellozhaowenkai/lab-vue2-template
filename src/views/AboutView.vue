@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <LikeButton
+    <like-button
       :initLikeStatus="initLikeStatus"
       @likeStatusChange="likeStatusChange"
     />
@@ -13,7 +13,7 @@ import LikeButton from "@/components/LikeButton";
 import { APILike } from "@/api/lab-django-demo";
 
 export default {
-  name: "About",
+  name: "AboutView",
 
   components: { LikeButton },
 

@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "Index",
+  name: "IndexLayout",
 };
 </script>
 

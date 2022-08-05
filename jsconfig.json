@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6"
-  },
-  "exclude": ["dist", "node_modules"]
+    "target": "es5",
+    "module": "esnext",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  }
 }

@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "Me",
+  name: "MePage",
 };
 </script>
 

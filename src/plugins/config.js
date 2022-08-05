@@ -14,7 +14,7 @@ function deepFreeze(object) {
   return Object.freeze(object);
 }
 
-Plugin.install = function(Vue, options) {
+Plugin.install = function (Vue, options) {
   Object.defineProperties(Vue.prototype, {
     $projectConfig: {
       configurable: false,
