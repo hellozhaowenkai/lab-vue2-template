@@ -1,7 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 import IndexLayout from "@/views/IndexLayout.vue";
 import HomeView from "@/views/HomeView.vue";
+
+const MePage = () =>
+  import(/* webpackChunkName: "me-page" */ "@/views/MePage.vue");
+const AppLayout = () =>
+  import(/* webpackChunkName: "app-layout" */ "@/views/AppLayout.vue");
+const HelloVuetify = () =>
+  import(/* webpackChunkName: "hello-vuetify" */ "@/components/HelloVuetify");
 
 Vue.use(VueRouter);
 
@@ -22,14 +30,25 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-          import(/* webpackChunkName: "about" */ "@/views/AboutView.vue"),
+          import(/* webpackChunkName: "about-view" */ "@/views/AboutView.vue"),
+      },
+    ],
+  },
+  {
+    path: "/ui",
+    component: AppLayout,
+    children: [
+      {
+        path: "",
+        name: "ui",
+        component: HelloVuetify,
       },
     ],
   },
   {
     path: "/me",
     name: "me",
-    component: () => import(/* webpackChunkName: "me" */ "@/views/MePage.vue"),
+    component: MePage,
   },
 ];
 

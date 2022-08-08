@@ -21,7 +21,7 @@ module.exports = defineConfig({
   // Whether to use the build of Vue core that includes the runtime compiler.
   runtimeCompiler: false,
   // By default `babel-loader` ignores all files inside `node_modules`.
-  transpileDependencies: true,
+  transpileDependencies: ["vuetify"],
   // Setting this to `false` can speed up production builds if you don't need source maps for production.
   productionSourceMap: true,
   // Configure the `crossorigin` attribute on `<link rel="stylesheet">` and `<script>` tags in generated HTML.
