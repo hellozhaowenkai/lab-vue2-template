@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <like-button
+    <LikeButton
       :initLikeStatus="initLikeStatus"
       @likeStatusChange="likeStatusChange"
     />
