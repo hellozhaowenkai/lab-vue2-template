@@ -10,7 +10,7 @@
 
 <script>
 import LikeButton from "@/components/LikeButton";
-import { APILike } from "@/api/lab-django-demo";
+import { APILike } from "@/api/lab-django-template";
 import dayjs from "dayjs";
 
 export default {

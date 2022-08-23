@@ -4,8 +4,8 @@ dirname = "config"
 filename = "settings.toml"
 
 [base]
-project-name = "lab-vue2-demo"
-base-url = "/app/vue2-demo/"
+project-name = "lab-vue2-template"
+base-url = "/app/vue2-template/"
 
 [sensitive-settings]
 enabled = true

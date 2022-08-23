@@ -3,18 +3,18 @@ import { APIModel } from "@/restful";
 const apiConfig = {
   production: {
     host: "https://lailai.link/api/",
-    prefix: "django-demo",
+    prefix: "django-template",
   },
   development: {
     host: "i-need-a-proxy",
-    prefix: "django-demo",
+    prefix: "django-template",
   },
   test: {
     host: "http://localhost:8000/",
     prefix: "",
   },
   mock: {
-    host: "https://mockapi.eolinker.com/",
+    host: "https://mockapi.eolink.com/",
     prefix: "kmLrhCWd76af7b0fc53533d8254c024f3b3b9d0e2e73d0b",
   },
 };

@@ -1,4 +1,4 @@
-# lab-vue2-demo
+# lab-vue2-template
 
 ## Description
 
@@ -6,7 +6,7 @@ Opinionated Vue2 Starter Template
 
 ## Code
 
-`vue2-demo` -> `Vue2 Demo`
+`vue2-template` -> `Vue2 Template`
 
 ## Quickstart
 
@@ -14,12 +14,37 @@ Opinionated Vue2 Starter Template
 
 ```bash
 # Clone repository with submodules.
-git clone --recursive https://github.com/hellozhaowenkai/lab-vue2-demo.git
+git clone --recursive https://github.com/hellozhaowenkai/lab-vue2-template.git
+# Then into the project root directory.
+cd lab-vue2-template
+```
+
+### Update the code
+
+```bash
+# Pull repository with submodules.
+git pull --recurse-submodules=on-demand
 # Pull repository force to overwrite local files.
 git fetch --all && git reset --hard origin/main && git pull
 ```
 
-## Checklist
+### Launch container
+
+```bash
+# Run [Deploy Script](deploy.sh).
+sh deploy.sh
+```
+
+### Restart container
+
+```bash
+# Do it if you know what it mean.
+docker container restart lab-vue2-template
+```
+
+## Usage
+
+### Checklist
 
 When you use this template, try follow the checklist to update your info properly:
 
@@ -34,15 +59,11 @@ When you use this template, try follow the checklist to update your info properl
 
 And, enjoy :)
 
-## Docker
-
-See [Deploy Script](deploy.sh).
-
-## Git LFS
+### Git LFS
 
 See [Git Large File Storage](https://git-lfs.github.com/).
 
-## Vue2 project setup
+### Vue2 project setup
 
 ```bash
 npm install
