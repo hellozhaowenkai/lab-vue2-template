@@ -14,7 +14,7 @@ Opinionated Vue2 Starter Template
 
 ```bash
 # Clone repository with submodules.
-git clone --recursive https://github.com/hellozhaowenkai/lab-vue2-template.git
+git clone --recursive https://github.com/hellozhaowenkai/lab-vue2-template/
 # Then into the project root directory.
 cd lab-vue2-template
 ```
@@ -31,8 +31,8 @@ git fetch --all && git reset --hard origin/main && git pull
 ### Launch container
 
 ```bash
-# Run [Deploy Script](deploy.sh).
-sh deploy.sh
+# Run [Deploy Script](ops/deploy.sh).
+sh ops/deploy.sh
 ```
 
 ### Restart container
@@ -51,7 +51,7 @@ When you use this template, try follow the checklist to update your info properl
 - [ ] Replace all `name` sections in project
 - [ ] Use a new port for docker container when deploying
 - [ ] Change the `base-url` value in `config/settings.toml`
-- [ ] Update the `deploy.sh` and `deploy-dev.sh`
+- [ ] Update the `ops/deploy.sh` and `ops/deploy-dev.sh`
 - [ ] Clean up the READMEs and update project's descriptions
 - [ ] Change the title in `public/index.html`
 - [ ] Change the favicon in `public`
