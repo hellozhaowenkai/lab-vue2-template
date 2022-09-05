@@ -1,0 +1,31 @@
+// ==================================================
+// SASS/SCSS variables.
+//
+// Description:
+//   Vuetify uses SASS/SCSS to craft the style and appearance of all aspects of the framework.
+// Note:
+//   SASS/SCSS variables are only supported using when using the `vuetify-loader`.
+//   This is done automatically when using the `vue-cli-plugin-vuetify` plugin.
+// Sections:
+//   - presets
+// References:
+//   - [SASS variables](https://vuetifyjs.com/en/features/sass-variables/)
+//   - [V2 variables](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss)
+//   - [V3 variables](https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/styles/settings/_variables.scss)
+// ==================================================
+
+// ==================================================
+// presets
+// ==================================================
+
+// See https://vuetifyjs.com/en/features/presets/.
+// See `vuetify/src/styles/generic/_reset.scss`.
+// See `ress/ress.css`
+
+// See https://github.com/vuetifyjs/vuetify/issues/1197.
+html {
+  overflow-y: auto !important;
+}
+
+// See https://github.com/vuetifyjs/vuetify/issues/15214.
+$reset: false;
