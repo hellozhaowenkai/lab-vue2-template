@@ -3,6 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
+          alt="Vuetify Logo"
           :src="require('@/assets/img/vuetify-logo.svg')"
           class="my-3"
           contain

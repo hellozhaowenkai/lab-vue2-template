@@ -112,7 +112,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "HelloVue",
 
   props: {
     msg: String,

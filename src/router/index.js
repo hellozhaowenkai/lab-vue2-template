@@ -6,8 +6,8 @@ import HomeView from "@/views/HomeView.vue";
 
 const MePage = () =>
   import(/* webpackChunkName: "me-page" */ "@/views/MePage.vue");
-const AppLayout = () =>
-  import(/* webpackChunkName: "app-layout" */ "@/views/AppLayout.vue");
+const UILayout = () =>
+  import(/* webpackChunkName: "ui-layout" */ "@/views/UILayout.vue");
 const HelloVuetify = () =>
   import(/* webpackChunkName: "hello-vuetify" */ "@/components/HelloVuetify");
 
@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path: "/ui",
-    component: AppLayout,
+    component: UILayout,
     children: [
       {
         path: "",
