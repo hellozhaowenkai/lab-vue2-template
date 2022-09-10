@@ -1,12 +1,27 @@
 {
   "name": "lab-vue2-template",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Opinionated Vue2 Starter Template",
+  "keywords": [
+    "front-end",
+    "vue2"
+  ],
+  "license": "MIT",
+  "author": "KevInZhao <hellozhaowenkai@gmail.com>",
+  "contributors": [
+    "KevInZhao <hellozhaowenkai@gmail.com>"
+  ],
+  "homepage": "https://lailai.link/app/vue2-template/",
+  "repository": "https://github.com/hellozhaowenkai/lab-vue2-template/",
+  "bugs": "https://github.com/hellozhaowenkai/lab-vue2-template/issues/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
+  },
+  "engines": {
+    "node": ">=16.13.0"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
