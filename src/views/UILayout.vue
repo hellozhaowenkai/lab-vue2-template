@@ -34,7 +34,9 @@
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <v-container fluid class="fill-height">
+        <router-view />
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -48,3 +50,5 @@ export default {
   }),
 };
 </script>
+
+<style scoped lang="scss"></style>

@@ -1,21 +1,28 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import IndexLayout from "@/views/IndexLayout.vue";
-import HomeView from "@/views/HomeView.vue";
+import IndexLayout from "@/views/IndexLayout";
+import HomeView from "@/views/HomeView";
 
-const MePage = () =>
-  import(/* webpackChunkName: "me-page" */ "@/views/MePage.vue");
+// route level code-splitting
+// this generates a separate chunk (about-view.[hash].js) for this route which is lazy-loaded when the route is visited.
+const AboutView = () =>
+  import(/* webpackChunkName: "about-view" */ "@/views/AboutView");
+const APPLayout = () =>
+  import(/* webpackChunkName: "app-layout" */ "@/views/APPLayout");
 const UILayout = () =>
-  import(/* webpackChunkName: "ui-layout" */ "@/views/UILayout.vue");
+  import(/* webpackChunkName: "ui-layout" */ "@/views/UILayout");
 const HelloVuetify = () =>
   import(/* webpackChunkName: "hello-vuetify" */ "@/components/HelloVuetify");
+
+const MePage = () => import(/* webpackChunkName: "me-page" */ "@/views/MePage");
 
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/", redirect: { name: "home" } },
   {
-    path: "/",
+    path: "/home",
     component: IndexLayout,
     children: [
       {
@@ -26,11 +33,23 @@ const routes = [
       {
         path: "/about",
         name: "about",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(/* webpackChunkName: "about-view" */ "@/views/AboutView.vue"),
+        component: AboutView,
+      },
+    ],
+  },
+  {
+    path: "/main",
+    component: APPLayout,
+    children: [
+      {
+        path: "",
+        name: "main",
+        component: HomeView,
+      },
+      {
+        path: "about",
+        name: "main-about",
+        component: AboutView,
       },
     ],
   },

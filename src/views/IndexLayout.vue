@@ -1,8 +1,8 @@
 <template>
-  <div id="index">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about/">About</router-link>
+  <div class="index-layout">
+    <div class="navigation">
+      <router-link :to="{ name: 'home' }">Home</router-link> |
+      <router-link :to="{ name: 'about' }">About</router-link>
     </div>
 
     <router-view />
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#nav {
+.navigation {
   padding: 30px;
 
   a {

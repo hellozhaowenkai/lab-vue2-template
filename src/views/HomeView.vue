@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-view">
     <img alt="Vue Logo" :src="require('@/assets/img/vue-logo.png')" />
 
     <HelloVue msg="Welcome to Your Vue.js App" />
@@ -18,3 +18,9 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.home-view {
+  width: 100%;
+}
+</style>

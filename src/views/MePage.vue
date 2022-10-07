@@ -1,5 +1,5 @@
 <template>
-  <div id="me">
+  <div class="me-page">
     <section>
       <div class="container">
         <header class="major">
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#me {
+.me-page {
   /* Basic */
 
   color: #888;
