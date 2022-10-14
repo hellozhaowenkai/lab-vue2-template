@@ -14,6 +14,8 @@ const UILayout = () =>
   import(/* webpackChunkName: "ui-layout" */ "@/views/UILayout");
 const HelloVuetify = () =>
   import(/* webpackChunkName: "hello-vuetify" */ "@/components/HelloVuetify");
+const ColorPicker = () =>
+  import(/* webpackChunkName: "color-picker" */ "@/components/ColorPicker");
 
 const MePage = () => import(/* webpackChunkName: "me-page" */ "@/views/MePage");
 
@@ -61,6 +63,11 @@ const routes = [
         path: "",
         name: "ui",
         component: HelloVuetify,
+      },
+      {
+        path: "color",
+        name: "color",
+        component: ColorPicker,
       },
     ],
   },
