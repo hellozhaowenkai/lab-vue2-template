@@ -35,7 +35,7 @@ module.exports = defineConfig({
 
       plugins: [
         new webpack.DefinePlugin({
-          $PROJECT_CONFIG: JSON.stringify($projectConfig),
+          __PROJECT_CONFIG__: JSON.stringify($projectConfig),
         }),
       ],
 

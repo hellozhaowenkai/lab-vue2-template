@@ -20,8 +20,7 @@ Plugin.install = function (Vue, options) {
       configurable: false,
       enumerable: false,
       writable: false,
-      // eslint-disable-next-line no-undef
-      value: deepFreeze($PROJECT_CONFIG), // webpack.DefinePlugin
+      value: deepFreeze(__PROJECT_CONFIG__), // webpack.DefinePlugin
     },
   });
 };
