@@ -8,24 +8,49 @@
 //   This is done automatically when using the `vue-cli-plugin-vuetify` plugin.
 // Sections:
 //   - presets
+//   - variables
+//   - overrides
 // References:
 //   - [SASS variables](https://vuetifyjs.com/en/features/sass-variables/)
 //   - [V2 variables](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss)
 //   - [V3 variables](https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/styles/settings/_variables.scss)
 // ==================================================
 
+// Global variables
+@import "~vuetify/src/styles/styles.sass";
+
 // ==================================================
 // presets
 // ==================================================
 
-// See https://vuetifyjs.com/en/features/presets/.
-// See `vuetify/src/styles/generic/_reset.scss`.
+// See https://vuetifyjs.com/en/features/presets/
+// See `vuetify/src/styles/generic/_reset.scss`
 // See `ress/ress.css`
 
-// See https://github.com/vuetifyjs/vuetify/issues/1197.
+// See https://vuetifyjs.com/en/getting-started/frequently-asked-questions/#scrollbar-overflow
+// See https://github.com/vuetifyjs/vuetify/issues/1197/
 html {
   overflow-y: auto !important;
 }
 
-// See https://github.com/vuetifyjs/vuetify/issues/15214.
+// ==================================================
+// variables
+// ==================================================
+
+// See https://github.com/vuetifyjs/vuetify/issues/15214/
 $reset: false;
+
+// ==================================================
+// overrides
+// ==================================================
+
+// See https://vuetifyjs.com/en/styles/border-radius/#overwriting-radiuses
+$rounded: (
+  0: 0,
+  "sm": $border-radius-root / 2,
+  null: $border-radius-root,
+  "lg": $border-radius-root * 2,
+  "xl": $border-radius-root * 6,
+  "pill": 9999px,
+  "circle": 50%,
+);

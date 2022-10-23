@@ -1,5 +1,6 @@
 import Vue from "vue";
-import Vuetify from "vuetify/lib/framework";
+// in order to use treeshaking, you must import Vuetify from vuetify/lib.
+import Vuetify from "vuetify/lib";
 
 Vue.use(Vuetify);
 
