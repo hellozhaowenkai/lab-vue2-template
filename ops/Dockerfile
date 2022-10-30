@@ -4,7 +4,7 @@
 FROM node:lts-alpine AS build-stage
 
 # make the `app` folder the current working directory
-WORKDIR /app
+WORKDIR /app/
 
 # copy both `package.json` and `package-lock.json` (if available)
 COPY package*.json ./
@@ -33,14 +33,14 @@ FROM nginx:stable-alpine AS production-stage
 ENV TZ=Asia/Shanghai
 
 # make the `app` folder the current working directory
-WORKDIR /app
+WORKDIR /app/
 
 # copy all files
-COPY --from=build-stage /app /app
+COPY --from=build-stage /app/ /app/
 # copy static files to NGINX html directory
-# COPY --from=build-stage /app/dist /app/dist
+# COPY --from=build-stage /app/dist/ /app/dist/
 # copy operations scripts to NGINX conf directory
-# COPY --from=build-stage /app/ops /app/ops
+# COPY --from=build-stage /app/ops/ /app/ops/
 
 # the container listens on the specified network ports at runtime
 EXPOSE 8888
@@ -49,4 +49,4 @@ EXPOSE 8888
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
 # run NGINX server in `/app` prefix path
-CMD ["-p", "/app", "-c", "/app/ops/nginx.conf"]
+CMD ["-p", "/app/", "-c", "/app/ops/nginx.conf"]

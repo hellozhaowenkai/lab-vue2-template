@@ -16,7 +16,7 @@ docker container run \
   --name     lab-vue2-template_dev \
   --network  lab-net \
   --publish  10299:8888 \
-  --volume   $PWD/logs:/app/logs \
+  --volume   $PWD/logs/:/app/logs/ \
   --volume   $HOME/Services/lab-secret/settings.private.toml:/app/config/settings.private.toml \
   --restart  unless-stopped \
   --interactive \
