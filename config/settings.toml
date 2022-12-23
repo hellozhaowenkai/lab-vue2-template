@@ -6,6 +6,7 @@ filename = "settings.toml"
 [base]
 project-name = "lab-vue2-template"
 base-url = "/app/vue2-template/"
+website-title = "Vue2 Template"
 
 [sensitive-settings]
 enabled = true

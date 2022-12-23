@@ -3,6 +3,9 @@ const webpack = require("webpack");
 const $projectConfig = require("./config");
 const $isProduction = process.env.NODE_ENV === "production";
 
+/**
+ * @type {import("@vue/cli-service").ProjectOptions}
+ */
 module.exports = defineConfig({
   // The base URL your application bundle will be deployed at.
   publicPath: $isProduction ? $projectConfig["base"]["base-url"] : "/",
@@ -62,6 +65,11 @@ module.exports = defineConfig({
   },
 
   chainWebpack: (config) => {
+    config.plugin("html").tap((args) => {
+      args[0].title = $projectConfig["base"]["website-title"];
+      return args;
+    });
+
     // config.module
     //   .rule("vue")
     //   .use("vue-loader")
