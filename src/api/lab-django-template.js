@@ -2,7 +2,7 @@ import { APIModel } from "@/restful";
 
 const apiConfig = {
   production: {
-    host: "https://lailai.link/api/",
+    host: "/api/",
     prefix: "django-template",
   },
   development: {

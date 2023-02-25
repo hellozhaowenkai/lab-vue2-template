@@ -110,7 +110,7 @@ export const APIModel = class {
     ["createdAt", "created_at"],
     ["lastActionAt", "last_action_at"],
     ["percentComplete", "percent_complete"],
-    ["status", "status"],
+    ["state", "state"],
     ...this.itemAPIMap,
   ];
   static translate(target, dictionary, reverse = false) {
@@ -291,4 +291,25 @@ export const APIModel = class {
       }
     );
   }
+};
+
+export const ERROR_STATUS_CODE = {
+  // EXAMPLE
+  100000: "Example: This is an example error message.",
+  100001: "MethodError: Only support GET.",
+  100002: "MethodError: Only support POST.",
+  // DATABASE
+  100100: "NotFound: No target found matching the query.",
+  100101:
+    "MultipleObjectsReturned: The query returned multiple objects when only one was expected.",
+  100102: "IntegrityError: Some kind of problem with a valid index.",
+  100103: "FieldError: Some kind of problem with a model field.",
+  100104:
+    "ValueError: Some fields do not exist in this model or are m2m fields.",
+  100105: "ValidationError: Enter a valid value.",
+  // AUTHENTICATION
+  100200: "UserDoesNotExist: User not found.",
+  // PAGINATION
+  100300:
+    "InvalidPage: The requested page is invalid (i.e. not an integer) or contains no objects.",
 };

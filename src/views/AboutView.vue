@@ -12,6 +12,7 @@
 <script>
 import LikeButton from "@/components/LikeButton";
 import { APILike } from "@/api/lab-django-template";
+import { ERROR_STATUS_CODE } from "@/restful";
 import dayjs from "dayjs";
 
 export default {
@@ -45,6 +46,7 @@ export default {
         })
         .catch((error) => {
           console.log("$error", error);
+          this.$toast.error(ERROR_STATUS_CODE[error.code] || error.message);
         })
         .finally(() => {
           const endTime = dayjs();
