@@ -4,7 +4,7 @@
       <v-col cols="12">
         <v-img
           alt="Vuetify Logo"
-          :src="require('@/assets/img/vuetify-logo.svg')"
+          :src="require('@/assets/lfs/vuetify-logo.svg')"
           class="my-3"
           contain
           height="200"

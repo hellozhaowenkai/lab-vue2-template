@@ -1,6 +1,6 @@
 <template>
   <div class="home-view">
-    <img alt="Vue Logo" :src="require('@/assets/img/vue-logo.png')" />
+    <img alt="Vue Logo" :src="require('@/assets/lfs/vue-logo.png')" />
 
     <HelloVue msg="Welcome to Your Vue.js App" />
   </div>

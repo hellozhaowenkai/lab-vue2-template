@@ -4,7 +4,7 @@
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
-          :src="require('@/assets/img/vuetify-logo-dark.png')"
+          :src="require('@/assets/lfs/vuetify-logo-dark.png')"
           class="shrink mr-2"
           contain
           transition="scale-transition"
@@ -13,7 +13,7 @@
 
         <v-img
           alt="Vuetify Name"
-          :src="require('@/assets/img/vuetify-name-dark.png')"
+          :src="require('@/assets/lfs/vuetify-name-dark.png')"
           class="shrink mt-1 hidden-sm-and-down"
           contain
           min-width="100"
