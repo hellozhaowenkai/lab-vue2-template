@@ -23,6 +23,8 @@ Opinionated Vue2 Starter Template
 ```bash
 # Clone repository with submodules.
 git clone --recursive https://github.com/hellozhaowenkai/lab-vue2-template.git
+# OR
+git clone --recursive git@github.com:hellozhaowenkai/lab-vue2-template.git
 # Then into the project root directory.
 cd lab-vue2-template
 ```
@@ -46,7 +48,7 @@ sh ops/deploy.sh
 ### Restart container
 
 ```bash
-# Do it if you know what it mean.
+# Do it if you know what it means.
 docker container restart lab-vue2-template
 ```
 
@@ -59,7 +61,7 @@ When you use this template, try follow the checklist to update your info properl
 - [ ] Replace all name and url sections in project
 - [ ] Replace `public/favicon.ico`
 - [ ] Update `README` and `package.json`
-- [ ] Update `ops/deploy.sh` and `ops/deploy-dev.sh`
+- [ ] Update `ops/deploy.sh`
 - [ ] Update `config/settings.toml`
 - [ ] Update `.github` folder, `LICENSE`, `NOTICE` and other files which contains the open source info
 - [ ] Remove `.idea` and `.vscode` folder which contains the editor info

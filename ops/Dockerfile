@@ -1,52 +1,50 @@
 # syntax=docker/dockerfile:1
 
-# build stage
+# Build stage.
 FROM node:lts-alpine AS build-stage
 
-# make the `app` folder the current working directory
-WORKDIR /app/
+# Make the `workspace` folder the current working directory.
+WORKDIR /workspace/
 
-# copy both `package.json` and `package-lock.json` (if available)
+# Copy both `package.json` and `package-lock.json` (if available).
 COPY package*.json ./
 
-# install project dependencies
-RUN echo "START." \
+# Install project dependencies.
+RUN echo 'START.' \
   && npm install \
-    --userconfig  $HOME/.cnpmrc \
+    --userconfig  "${HOME}/.cnpmrc" \
     --registry    https://registry.npmmirror.com \
-    --cache       $HOME/.npm/.cache/cnpm/ \
+    --cache       "${HOME}/.npm/.cache/cnpm/" \
     --disturl=https://npmmirror.com/dist/ \
-  && echo "END."
+  && echo 'END.'
 
-# copy project files and folders to the current working directory (i.e. `app` folder)
+# Copy project files and folders to the current working directory (i.e. `workspace` folder).
 COPY . .
 
-# build app for production with minification
-RUN echo "START." \
+# Build app for production with minification.
+RUN echo 'START.' \
   && npm run build \
-  && echo "END."
+  && echo 'END.'
 
-# production stage
+# Production stage.
 FROM nginx:stable-alpine AS production-stage
 
-# set timezone
+# Set timezone.
 ENV TZ=Asia/Shanghai
 
-# make the `app` folder the current working directory
-WORKDIR /app/
+# Make the `workspace` folder the current working directory.
+WORKDIR /workspace/
 
-# copy all files
-COPY --from=build-stage /app/ /app/
-# copy static files to NGINX html directory
-# COPY --from=build-stage /app/dist/ /app/dist/
-# copy operations scripts to NGINX conf directory
-# COPY --from=build-stage /app/ops/ /app/ops/
+# Copy static files to NGINX html directory.
+COPY --from=build-stage /workspace/dist/ /workspace/dist/
+# Copy operations scripts to NGINX config directory.
+COPY ops/ ops/
 
-# the container listens on the specified network ports at runtime
+# The container listens on the specified network ports at runtime.
 EXPOSE 8888
 
-# run NGINX server in foreground
+# Run NGINX server in foreground.
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
-# run NGINX server in `/app` prefix path
-CMD ["-p", "/app/", "-c", "/app/ops/nginx.conf"]
+# Run NGINX server in `/workspace/` prefix path.
+CMD ["-p", "/workspace/", "-c", "/workspace/ops/nginx.conf"]
