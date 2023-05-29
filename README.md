@@ -106,6 +106,14 @@ npm run lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## Update Browserslist DB
+
+```bash
+npx update-browserslist-db@latest
+```
+
+This update will bring data about new browsers to polyfills tools like Autoprefixer or Babel and reduce already unnecessary polyfills.
+
 ## Contributing
 
 Read through our [Contributing Guidelines](CONTRIBUTING.md) to learn about our submission process, coding rules and more.
