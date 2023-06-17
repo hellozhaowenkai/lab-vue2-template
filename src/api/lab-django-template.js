@@ -65,7 +65,7 @@ const axiosInstance = APIModel.axios.create({
 //   }
 // );
 
-export const APILike = class extends APIModel {
+export const APILikeModel = class extends APIModel {
   static axios = axiosInstance;
   static prefix = "likes";
   static fieldsMap = [

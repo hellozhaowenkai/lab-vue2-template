@@ -5,7 +5,9 @@
       <router-link :to="{ name: 'about' }">About</router-link>
     </div>
 
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 

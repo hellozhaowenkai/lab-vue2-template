@@ -293,7 +293,7 @@ export const APIModel = class {
   }
 };
 
-export const ERROR_STATUS_CODE = {
+export const ERROR_STATUS_CODE = Object.freeze({
   // EXAMPLE
   100000: "Example: This is an example error message.",
   100001: "MethodError: Only support GET.",
@@ -312,4 +312,11 @@ export const ERROR_STATUS_CODE = {
   // PAGINATION
   100300:
     "InvalidPage: The requested page is invalid (i.e. not an integer) or contains no objects.",
-};
+});
+
+export const OPERATION_API_STATE = Object.freeze({
+  NOT_STARTED: Symbol("NOT_STARTED"),
+  RUNNING: Symbol("RUNNING"),
+  SUCCEEDED: Symbol("SUCCEEDED"),
+  FAILED: Symbol("FAILED"),
+});

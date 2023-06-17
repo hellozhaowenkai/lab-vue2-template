@@ -22,7 +22,7 @@ const MePage = () => import(/* webpackChunkName: "me-page" */ "@/views/MePage");
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", redirect: { name: "home" } },
+  { path: "/", redirect: { name: "main" } },
   {
     path: "/home",
     component: IndexLayout,
