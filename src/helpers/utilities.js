@@ -157,3 +157,7 @@ export function* createIterator(iterable) {
     }
   }
 }
+
+export function trailingSlash(stringLike) {
+  return stringLike.endsWith("/") ? stringLike : stringLike + "/";
+}

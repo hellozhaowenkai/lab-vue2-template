@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import { trailingSlash } from "@/helpers/utilities";
 import IndexLayout from "@/views/IndexLayout";
 import HomeView from "@/views/HomeView";
 
@@ -18,6 +19,8 @@ const ColorPicker = () =>
   import(/* webpackChunkName: "color-picker" */ "@/components/ColorPicker");
 
 const MePage = () => import(/* webpackChunkName: "me-page" */ "@/views/MePage");
+const NotFoundPage = () =>
+  import(/* webpackChunkName: "not-found-page" */ "@/views/NotFoundPage.vue");
 
 Vue.use(VueRouter);
 
@@ -76,12 +79,21 @@ const routes = [
     name: "me",
     component: MePage,
   },
+  {
+    path: "*",
+    name: "404",
+    component: NotFoundPage,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach(({ path, hash }, from, next) => {
+  return path.endsWith("/") ? next() : next(trailingSlash(path) + hash);
 });
 
 export default router;
