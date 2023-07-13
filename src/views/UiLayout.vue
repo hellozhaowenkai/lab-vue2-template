@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "UILayout",
+  name: "UiLayout",
 
   data: () => ({
     //

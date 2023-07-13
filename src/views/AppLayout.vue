@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "APPLayout",
+  name: "AppLayout",
 
   data() {
     return {

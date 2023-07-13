@@ -1,16 +1,16 @@
 [host]
-username = "<host username>"
-password = "<host password>"
+username = "<VPS `username`>"
+password = "<VPS `password`>"
 
 [django]
-secret-key = "<django `SECRET_KEY`>"
+secret-key = "<Django `SECRET_KEY`>"
 
 [tencent-cloud]
-app-id = "<tencent cloud `APPID`>"
-access.id = "<tencent cloud `SecretID`>"
-access.key = "<tencent cloud `SecretKey`>"
+app-id = "<Tencent Cloud `APPID`>"
+secret-id = "<Tencent Cloud `SecretId`>"
+secret-key = "<Tencent Cloud `SecretKey`>"
 
 [aliyun]
-role-arn = "<aliyun `Role ARN`>"
-access.id = "<aliyun `AccessKey ID`>"
-access.key = "<aliyun `AccessKey Secret`>"
+role-arn = "<Alibaba Cloud `Role ARN`>"
+access-key-id = "<Alibaba Cloud `AccessKey ID`>"
+access-key-secret = "<Alibaba Cloud `AccessKey Secret`>"

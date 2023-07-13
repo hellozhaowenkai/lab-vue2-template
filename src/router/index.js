@@ -9,10 +9,10 @@ import HomeView from "@/views/HomeView";
 // this generates a separate chunk (about-view.[hash].js) for this route which is lazy-loaded when the route is visited.
 const AboutView = () =>
   import(/* webpackChunkName: "about-view" */ "@/views/AboutView");
-const APPLayout = () =>
-  import(/* webpackChunkName: "app-layout" */ "@/views/APPLayout");
-const UILayout = () =>
-  import(/* webpackChunkName: "ui-layout" */ "@/views/UILayout");
+const AppLayout = () =>
+  import(/* webpackChunkName: "app-layout" */ "@/views/AppLayout.vue");
+const UiLayout = () =>
+  import(/* webpackChunkName: "ui-layout" */ "@/views/UiLayout.vue");
 const HelloVuetify = () =>
   import(/* webpackChunkName: "hello-vuetify" */ "@/components/HelloVuetify");
 const ColorPicker = () =>
@@ -44,7 +44,7 @@ const routes = [
   },
   {
     path: "/main",
-    component: APPLayout,
+    component: AppLayout,
     children: [
       {
         path: "",
@@ -60,7 +60,7 @@ const routes = [
   },
   {
     path: "/ui",
-    component: UILayout,
+    component: UiLayout,
     children: [
       {
         path: "",

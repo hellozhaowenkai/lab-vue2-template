@@ -1,4 +1,4 @@
-import { APIModel } from "@/restful";
+import { ApiModel } from "@/restful";
 
 const apiConfig = {
   production: {
@@ -24,7 +24,7 @@ const devFlag = "development";
 // const devFlag = "test";
 // const devFlag = "mock";
 
-const baseAPIConfig =
+const baseApiConfig =
   process.env.NODE_ENV === "production"
     ? apiConfig["production"]
     : apiConfig[devFlag];
@@ -32,8 +32,8 @@ const baseAPIConfig =
 // Full config:  https://github.com/axios/axios#request-config
 // Custom instance defaults
 // Set config defaults when creating the instance
-const axiosInstance = APIModel.axios.create({
-  baseURL: APIModel.pathResolver(baseAPIConfig.host, baseAPIConfig.prefix),
+const axiosInstance = ApiModel.axios.create({
+  baseURL: ApiModel.pathResolver(baseApiConfig.host, baseApiConfig.prefix),
 });
 
 // Alter defaults after instance has been created
@@ -65,7 +65,7 @@ const axiosInstance = APIModel.axios.create({
 //   }
 // );
 
-export const APILikeModel = class extends APIModel {
+export const ApiLikeModel = class extends ApiModel {
   static axios = axiosInstance;
   static prefix = "likes";
   static fieldsMap = [

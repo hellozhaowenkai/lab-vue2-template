@@ -1,19 +1,20 @@
 const fs = require("fs");
 const path = require("path");
+const toml = require("@ltd/j-toml");
 
-function myTOMLParser() {
+function myTomlParser() {
   function tomlParser(filePath) {
     const toml = require("@ltd/j-toml");
 
-    const tomlString = String(fs.readFileSync(filePath));
-    return toml.parse(tomlString, 1.0, "\n");
+    const tomlString = String(fs.readFileSync(filePath, { encoding: "utf-8" }));
+    return toml.parse(tomlString, 1.0, "\n", false, null);
   }
 
   return tomlParser;
 }
 
 function organizeSettings() {
-  const tomlParser = myTOMLParser();
+  const tomlParser = myTomlParser();
 
   const configPath = path.resolve(__dirname);
   const mainSettings = tomlParser(path.join(configPath, "settings.toml"));

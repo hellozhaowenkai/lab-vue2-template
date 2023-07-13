@@ -2,7 +2,7 @@
   <div class="home-view">
     <img alt="Vue Logo" :src="require('@/assets/lfs/vue-logo.png')" />
 
-    <HelloVue msg="Welcome to Your Vue.js App" />
+    <HelloVue message="Welcome to Your Vue.js App" />
   </div>
 </template>
 
@@ -13,9 +13,7 @@ import HelloVue from "@/components/HelloVue.vue";
 export default {
   name: "HomeView",
 
-  components: {
-    HelloVue,
-  },
+  components: { HelloVue },
 };
 </script>
 

@@ -75,7 +75,7 @@
 
 <script>
 import LikeButton from "@/components/LikeButton";
-import { APILikeModel } from "@/api/lab-django-template";
+import { ApiLikeModel } from "@/api/lab-django-template";
 import { ERROR_STATUS_CODE, OPERATION_API_STATE } from "@/restful";
 import dayjs from "dayjs";
 
@@ -154,7 +154,7 @@ export default {
       console.time("$serverTiming");
       const startTime = dayjs();
 
-      const apiLikeModel = new APILikeModel(pk, fields);
+      const apiLikeModel = new ApiLikeModel(pk, fields);
       state = OPERATION_API_STATE.RUNNING;
 
       await apiLikeModel

@@ -2,11 +2,11 @@ import { shallowMount } from "@vue/test-utils";
 import HelloVue from "@/components/HelloVue.vue";
 
 describe("HelloVue.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "hello, world";
+  it("renders props.message when passed", () => {
+    const message = "hello, world";
     const wrapper = shallowMount(HelloVue, {
-      propsData: { msg },
+      propsData: { message },
     });
-    expect(wrapper.text()).toMatch(msg);
+    expect(wrapper.text()).toMatch(message);
   });
 });

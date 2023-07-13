@@ -59,7 +59,7 @@ axios.defaults.xsrfHeaderName = "X-XSRF-TOKEN"; // default
 //   }
 // );
 
-export const APIModel = class {
+export const ApiModel = class {
   static axios = axios;
   static prefix = "models";
   static fieldsMap = [
@@ -70,28 +70,28 @@ export const APIModel = class {
     ["isDeleted", "is_deleted"],
   ];
 
-  static APIError = class extends Error {
+  static ApiError = class extends Error {
     constructor(code = 0, message = "") {
       super(message);
-      this.name = "APIError";
+      this.name = "ApiError";
       this.code = code;
       this.message = message;
     }
   };
 
-  static errorAPIMap = [
+  static errorApiMap = [
     ["error", "error"],
     ["code", "code"],
     ["message", "message"],
   ];
-  static itemAPIMap = [
+  static itemApiMap = [
     ["model", "model"],
     ["pk", "pk"],
     ["fields", "fields"],
     ["result", "result"],
-    ...this.errorAPIMap,
+    ...this.errorApiMap,
   ];
-  static collectionAPIMap = [
+  static collectionApiMap = [
     ["orderBy", "order_by"],
     ["size", "size"],
     ["page", "page"],
@@ -104,14 +104,14 @@ export const APIModel = class {
     ["next", "next"],
     ["startIndex", "start_index"],
     ["endIndex", "end_index"],
-    ...this.itemAPIMap,
+    ...this.itemApiMap,
   ];
-  static operationAPIMap = [
+  static operationApiMap = [
     ["createdAt", "created_at"],
     ["lastActionAt", "last_action_at"],
     ["percentComplete", "percent_complete"],
     ["state", "state"],
-    ...this.itemAPIMap,
+    ...this.itemApiMap,
   ];
   static translate(target, dictionary, reverse = false) {
     const [targetIndex, resultIndex] = reverse ? [1, 0] : [0, 1];
@@ -179,7 +179,7 @@ export const APIModel = class {
             : response.data;
 
           if (data.error)
-            throw new this.APIError(data.error.code, data.error.message);
+            throw new this.ApiError(data.error.code, data.error.message);
           else resolve(data);
         })
         .catch((error) => {
@@ -203,7 +203,7 @@ export const APIModel = class {
       {
         translate: [
           ...this.constructor.fieldsMap,
-          ...this.constructor.itemAPIMap,
+          ...this.constructor.itemApiMap,
         ],
       }
     );
@@ -223,7 +223,7 @@ export const APIModel = class {
       {
         translate: [
           ...this.constructor.fieldsMap,
-          ...this.constructor.collectionAPIMap,
+          ...this.constructor.collectionApiMap,
         ],
       }
     );
@@ -239,7 +239,7 @@ export const APIModel = class {
       {
         translate: [
           ...this.constructor.fieldsMap,
-          ...this.constructor.operationAPIMap,
+          ...this.constructor.operationApiMap,
         ],
       }
     );
@@ -255,7 +255,7 @@ export const APIModel = class {
       {
         translate: [
           ...this.constructor.fieldsMap,
-          ...this.constructor.operationAPIMap,
+          ...this.constructor.operationApiMap,
         ],
       }
     );
@@ -271,7 +271,7 @@ export const APIModel = class {
       {
         translate: [
           ...this.constructor.fieldsMap,
-          ...this.constructor.operationAPIMap,
+          ...this.constructor.operationApiMap,
         ],
       }
     );
@@ -286,7 +286,7 @@ export const APIModel = class {
       {
         translate: [
           ...this.constructor.fieldsMap,
-          ...this.constructor.operationAPIMap,
+          ...this.constructor.operationApiMap,
         ],
       }
     );
