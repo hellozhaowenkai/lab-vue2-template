@@ -161,3 +161,29 @@ export function* createIterator(iterable) {
 export function trailingSlash(stringLike) {
   return stringLike.endsWith("/") ? stringLike : stringLike + "/";
 }
+
+export function isEmptyString(stringLike) {
+  if (getBaseTypeOf(stringLike) !== JS_DATA_TYPES.STRING) return false;
+
+  return stringLike === "";
+}
+
+export function isEmptyArray(arrayLike) {
+  if (getBaseTypeOf(arrayLike) !== JS_DATA_TYPES.ARRAY) return false;
+
+  return arrayLike.length === 0;
+}
+
+export function isEmptyObject(objectLike) {
+  if (getBaseTypeOf(objectLike) !== JS_DATA_TYPES.OBJECT) return false;
+
+  return Object.getOwnPropertyNames(objectLike).length === 0;
+}
+
+export function isNull(objectLike) {
+  return getBaseTypeOf(objectLike) === JS_DATA_TYPES.NULL;
+}
+
+export function isUndefined(objectLike) {
+  return getBaseTypeOf(objectLike) === JS_DATA_TYPES.UNDEFINED;
+}

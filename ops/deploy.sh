@@ -25,7 +25,7 @@ docker image build \
   --tag   "${IMAGE_NAME}" \
   --file  "${PWD}/ops/Dockerfile" \
   "${PWD}" \
-|| { echo "ERROR: image build failed." ; exit 1 ; }
+|| { echo "ERROR: image build failed." >&2 ; exit 1 ; }
 
 # Delete container.
 docker container rm -f "${CONTAINER_NAME}"

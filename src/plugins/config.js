@@ -14,17 +14,17 @@ function deepFreeze(object) {
   return Object.freeze(object);
 }
 
-Plugin.install = function (Vue, options) {
-  Object.defineProperties(Vue.prototype, {
-    $projectConfig: {
-      configurable: false,
-      enumerable: false,
-      writable: false,
-      value: deepFreeze(__PROJECT_CONFIG__), // webpack.DefinePlugin
-    },
-  });
+const configPlugin = {
+  install(Vue, options) {
+    Object.defineProperties(Vue.prototype, {
+      $projectConfig: {
+        configurable: false,
+        enumerable: false,
+        writable: false,
+        value: deepFreeze(__PROJECT_CONFIG__), // webpack.DefinePlugin
+      },
+    });
+  },
 };
 
-Vue.use(Plugin);
-
-export default Plugin;
+Vue.use(configPlugin);

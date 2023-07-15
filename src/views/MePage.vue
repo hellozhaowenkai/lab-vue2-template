@@ -1,12 +1,12 @@
 <template>
-  <div class="me-page">
+  <div id="resume" class="me-page">
     <section>
       <div class="container">
         <header class="major">
           <h2>Hi 🤩</h2>
           <p>
             My name is Kevin Zhao,<br />
-            but I usually go by the name of `<a href="#me">KevInZhao</a>` in
+            but I usually go by the name of `<a href="#resume">KevInZhao</a>` in
             social networking.
           </p>
         </header>

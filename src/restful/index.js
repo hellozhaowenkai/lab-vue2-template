@@ -158,7 +158,7 @@ export const ApiModel = class {
 
     return protocol + normalizedPath;
   }
-  static request(axiosConfig, { translate = false } = {}) {
+  static request(axiosConfig, { translate = [] } = {}) {
     return new Promise((resolve, reject) => {
       if (translate) {
         axiosConfig.data = this.interfaceTranslator(
@@ -174,9 +174,10 @@ export const ApiModel = class {
         .then((response) => {
           // console.log("AxiosResponse", response);
 
-          const data = translate
-            ? this.interfaceTranslator(response.data, translate, true)
-            : response.data;
+          const data =
+            translate.length > 0
+              ? this.interfaceTranslator(response.data, translate, true)
+              : response.data;
 
           if (data.error)
             throw new this.ApiError(data.error.code, data.error.message);
