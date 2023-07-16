@@ -166,7 +166,7 @@ export default {
 
   section {
     text-align: left;
-    font-family: source-code-pro, cursive;
+    font-family: "Source Code Pro", cursive;
   }
 
   header p {

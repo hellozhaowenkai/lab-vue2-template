@@ -5,6 +5,10 @@ import Vuetify from "vuetify/lib";
 Vue.use(Vuetify);
 
 // See `vuetify/types/services/presets`.
-const userPreset = {};
+const userPreset = {
+  icons: {
+    iconfont: "mdiSvg",
+  },
+};
 
 export default new Vuetify(userPreset);

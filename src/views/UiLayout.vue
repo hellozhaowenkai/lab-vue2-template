@@ -13,7 +13,7 @@
         text
       >
         <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <v-icon>{{ svgIcon.mdiOpenInNew }}</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -26,11 +26,13 @@
 </template>
 
 <script>
+import { mdiOpenInNew } from "@mdi/js";
+
 export default {
   name: "UiLayout",
 
   data: () => ({
-    //
+    svgIcon: { mdiOpenInNew },
   }),
 };
 </script>

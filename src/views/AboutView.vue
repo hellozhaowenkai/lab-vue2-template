@@ -13,7 +13,7 @@
       <v-card-subtitle
         ref="subtitleDOM"
         :class="isLiked ? 'green--text' : 'red--text'"
-        :style="{ fontFamily: 'source-code-pro, cursive' }"
+        :style="{ fontFamily: `'Source Code Pro', sans-serif` }"
       >
         {{ noRecords ? "Hello." : "Thanks!" }}
       </v-card-subtitle>
@@ -27,7 +27,7 @@
             cols="auto"
             align-self="center"
           >
-            <v-icon x-large>mdi-account-circle</v-icon>
+            <v-icon x-large>{{ svgIcon.mdiAccountCircle }}</v-icon>
 
             <v-simple-table dense>
               <template v-slot:default>
@@ -55,7 +55,7 @@
             type="text"
             label="Say something?"
             v-model.trim="message"
-            prepend-icon="mdi-message"
+            :prepend-icon="svgIcon.mdiMessage"
           >
             <template v-slot:append-outer>
               <v-icon
@@ -63,7 +63,7 @@
                 :disabled="!message"
                 @click.stop="(event) => allRecordsPush(message, event)"
               >
-                mdi-send
+                {{ svgIcon.mdiSend }}
               </v-icon>
             </template>
           </v-text-field>
@@ -77,6 +77,7 @@
 import LikeButton from "@/components/LikeButton";
 import { ApiLikeModel } from "@/api/lab-django-template";
 import { ERROR_STATUS_CODE, OPERATION_API_STATE } from "@/restful";
+import { mdiAccountCircle, mdiMessage, mdiSend } from "@mdi/js";
 import dayjs from "dayjs";
 
 export default {
@@ -87,6 +88,7 @@ export default {
   data() {
     return {
       websiteTitle: this.$projectConfig["base"]["website-title"],
+      svgIcon: { mdiAccountCircle, mdiMessage, mdiSend },
       initLikeStatus: false,
       isLiked: false,
       message: "Hi.",
@@ -148,6 +150,7 @@ export default {
       this.allRecordsPush(isLiked ? "I like it!" : "I don't like it!");
       this.likeModelChange(1, { lastAddBy: isLiked ? 1 : -1 });
     },
+
     async likeModelChange(pk, fields) {
       let state = OPERATION_API_STATE.NOT_STARTED;
 

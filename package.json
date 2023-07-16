@@ -1,6 +1,6 @@
 {
   "name": "lab-vue2-template",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Opinionated Vue2 Starter Template",
   "keywords": [
     "front-end",
@@ -24,13 +24,11 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@mdi/font": "^7.2.96",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
     "dayjs": "^1.11.8",
     "normalize.css": "^8.0.1",
     "ress": "^5.0.2",
-    "roboto-fontface": "*",
     "vue": "<2.7.0",
     "vue-router": "<4.0.0",
     "vue-toastification": "<2.0.0",
@@ -40,7 +38,10 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@fontsource/roboto": "^5.0.5",
+    "@fontsource/source-code-pro": "^5.0.5",
     "@ltd/j-toml": "^1.38.0",
+    "@mdi/js": "^7.2.96",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
