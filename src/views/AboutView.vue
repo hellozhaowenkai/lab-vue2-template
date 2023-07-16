@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="about" v-resize="onResize">
     <h1>This is an about page</h1>
 
     <LikeButton
@@ -120,7 +120,7 @@ export default {
 
   beforeMount() {
     const docStyle = document.documentElement.style;
-    docStyle.setProperty("--max-width", `${window.innerWidth * 0.4}px`);
+    docStyle.setProperty("--min-width", "256px");
   },
 
   mounted() {
@@ -193,6 +193,11 @@ export default {
         console.log("$subtitleDOM", this.$refs.subtitleDOM);
       });
     },
+
+    onResize() {
+      console.log("$screen", window.screen);
+      console.log("$breakpoint", this.$vuetify.breakpoint);
+    },
   },
 };
 </script>
@@ -208,7 +213,8 @@ export default {
 }
 
 .card {
-  width: var(--max-width, 100vw);
+  width: 60%;
+  min-width: var(--min-width, 64px);
 
   ::v-deep .v-card__subtitle {
     font-weight: bold !important;

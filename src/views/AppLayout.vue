@@ -9,7 +9,13 @@
       <!-- -->
     </v-app-bar>
 
-    <v-navigation-drawer color="grey lighten-3" app clipped permanent>
+    <v-navigation-drawer
+      color="grey lighten-3"
+      app
+      clipped
+      permanent
+      height="100%"
+    >
       <!-- -->
     </v-navigation-drawer>
 
