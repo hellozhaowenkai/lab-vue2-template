@@ -1,0 +1,10 @@
+// root
+export const SOME_GETTER = "SOME_GETTER";
+export const SOME_MUTATION = "SOME_MUTATION";
+export const SOME_ACTION = "SOME_ACTION";
+
+// like module
+export const DEFAULT_LIKE = "DEFAULT_LIKE";
+export const GET_LIKE_BY_PK = "GET_LIKE_BY_PK";
+export const INCREMENT_LIKE_BY_PK_MUTATION = "INCREMENT_LIKE_BY_PK_MUTATION";
+export const INCREMENT_LIKE_BY_PK_ACTION = "INCREMENT_LIKE_BY_PK_ACTION";

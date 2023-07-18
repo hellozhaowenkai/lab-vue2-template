@@ -8,7 +8,11 @@
     />
 
     <v-card class="card" style="margin: auto">
-      <v-card-title>{{ websiteTitle }}</v-card-title>
+      <v-card-title class="ma-2">
+        <v-badge :content="String(totalCount)">
+          {{ websiteTitle }}
+        </v-badge>
+      </v-card-title>
 
       <v-card-subtitle
         ref="subtitleDOM"
@@ -74,11 +78,18 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+import dayjs from "dayjs";
 import LikeButton from "@/components/LikeButton";
 import { ApiLikeModel } from "@/api/lab-django-template";
 import { ERROR_STATUS_CODE, OPERATION_API_STATE } from "@/restful";
 import { mdiAccountCircle, mdiMessage, mdiSend } from "@mdi/js";
-import dayjs from "dayjs";
+import {
+  DEFAULT_LIKE,
+  GET_LIKE_BY_PK,
+  INCREMENT_LIKE_BY_PK_MUTATION,
+  INCREMENT_LIKE_BY_PK_ACTION,
+} from "@/store/flux-types";
 
 export default {
   name: "AboutView",
@@ -99,6 +110,11 @@ export default {
   computed: {
     noRecords() {
       return this.allRecords.length < 1;
+    },
+
+    totalCount() {
+      // return this.$store.getters[GET_LIKE_BY_PK](1).totalCount;
+      return this.$store.getters[DEFAULT_LIKE].totalCount;
     },
   },
 
@@ -149,6 +165,12 @@ export default {
 
       this.allRecordsPush(isLiked ? "I like it!" : "I don't like it!");
       this.likeModelChange(1, { lastAddBy: isLiked ? 1 : -1 });
+      if (isLiked) this.likeStoreChange(1);
+    },
+
+    likeStoreChange(pk) {
+      // this.$store.commit(INCREMENT_LIKE_BY_PK_MUTATION, { pk });
+      this.$store.dispatch(INCREMENT_LIKE_BY_PK_ACTION, { pk });
     },
 
     async likeModelChange(pk, fields) {
