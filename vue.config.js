@@ -32,9 +32,10 @@ module.exports = defineConfig({
   // Set to `true` to enable `Subresource Integrity` (SRI) on `<link rel="stylesheet">` and `<script>` tags in generated HTML.
   integrity: false,
 
+  // The function can either mutate the config and return nothing, OR return a cloned or merged version of the config.
   configureWebpack: (config) => {
     return {
-      devtool: $isProduction ? "source-map" : "eval-source-map",
+      devtool: require("./src/helpers/webpack-devtool-option")($isProduction),
 
       plugins: [
         new webpack.DefinePlugin({
@@ -64,6 +65,7 @@ module.exports = defineConfig({
     };
   },
 
+  // Allows for more fine-grained modification of the internal webpack config.
   chainWebpack: (config) => {
     config.plugin("html").tap((args) => {
       args[0].title = $projectConfig["base"]["website-title"];
