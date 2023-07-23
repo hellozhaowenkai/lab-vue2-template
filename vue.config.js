@@ -1,7 +1,7 @@
 const { defineConfig } = require("@vue/cli-service");
 const webpack = require("webpack");
 const $projectConfig = require("./config");
-const $isProduction = process.env.NODE_ENV === "production";
+const $isProduction = require("./src/helpers/is-production");
 
 /**
  * @type {import("@vue/cli-service").ProjectOptions}

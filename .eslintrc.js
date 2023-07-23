@@ -1,20 +1,27 @@
+const $isProduction = require("./src/helpers/is-production");
+
 module.exports = {
   root: true,
   env: {
     node: true,
   },
   extends: [
-    "eslint:recommended",
     "plugin:vue/essential",
+    "eslint:recommended",
+    "@vue/typescript/recommended",
     "plugin:prettier/recommended",
   ],
   parserOptions: {
-    parser: "@babel/eslint-parser",
+    ecmaVersion: 2020,
   },
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-unused-vars": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-console": $isProduction ? "warn" : "off",
+    "no-debugger": $isProduction ? "warn" : "off",
+    "no-unused-vars": $isProduction ? "warn" : "off",
+    "no-empty-function": $isProduction ? "warn" : "off",
+    "@typescript-eslint/no-explicit-any": $isProduction ? "warn" : "off",
+    "@typescript-eslint/no-unused-vars": $isProduction ? "warn" : "off",
+    "@typescript-eslint/no-empty-function": $isProduction ? "warn" : "off",
   },
   globals: {
     __PROJECT_CONFIG__: "readonly",

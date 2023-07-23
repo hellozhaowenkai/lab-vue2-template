@@ -24,10 +24,9 @@ const devFlag = "development";
 // const devFlag = "test";
 // const devFlag = "mock";
 
-const baseApiConfig =
-  process.env.NODE_ENV === "production"
-    ? apiConfig["production"]
-    : apiConfig[devFlag];
+const baseApiConfig = require("@/helpers/is-production")
+  ? apiConfig["production"]
+  : apiConfig[devFlag];
 
 // Full config:  https://github.com/axios/axios#request-config
 // Custom instance defaults
