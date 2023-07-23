@@ -172,7 +172,7 @@ export const ApiModel = class {
       }
       this.axios(axiosConfig)
         .then((response) => {
-          // console.log("AxiosResponse", response);
+          // console.log("$AxiosResponse", response);
 
           const data =
             translate.length > 0
@@ -184,7 +184,8 @@ export const ApiModel = class {
           else resolve(data);
         })
         .catch((error) => {
-          console.error(error);
+          // console.log("$AxiosError", error);
+
           reject(error);
         });
     });

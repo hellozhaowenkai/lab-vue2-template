@@ -37,8 +37,8 @@ export default {
   },
 
   watch: {
-    pickedColor(value, oldValue) {
-      console.log("watch", "pickedColor", value, oldValue);
+    pickedColor(value) {
+      console.log("$pickedColor", value);
     },
   },
 };

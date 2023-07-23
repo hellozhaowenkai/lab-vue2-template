@@ -82,6 +82,7 @@ import { mapState, mapGetters } from "vuex";
 import dayjs from "dayjs";
 import { mdiAccountCircle, mdiMessage, mdiSend } from "@mdi/js";
 import LikeButton from "@/components/LikeButton";
+import { logger } from "@/helpers/logging";
 import { ApiLikeModel } from "@/api/lab-django-template";
 import { ERROR_STATUS_CODE, OPERATION_API_STATE } from "@/restful";
 import {
@@ -90,9 +91,6 @@ import {
   INCREMENT_LIKE_BY_PK_MUTATION,
   INCREMENT_LIKE_BY_PK_ACTION,
 } from "@/store/flux-types";
-
-import { Logger } from "@/helpers/logging";
-const logger = new Logger("Logger", "DEBUG");
 
 export default {
   name: "AboutView",
@@ -123,7 +121,7 @@ export default {
 
   watch: {
     isLiked(value, oldValue) {
-      logger.output("DEBUG", "$isLiked", value, oldValue);
+      logger.debug("$isLiked", value, oldValue);
     },
 
     noRecords: {
@@ -143,7 +141,7 @@ export default {
   },
 
   mounted() {
-    logger.output("INFO", "$currentTime", dayjs().format());
+    logger.info("$currentTime", dayjs().format());
   },
 
   beforeUpdate() {},
@@ -156,7 +154,7 @@ export default {
 
   methods: {
     allRecordsPush(message, event) {
-      logger.output("DEBUG", "$event", event);
+      logger.debug("$event", event);
 
       const createdAt = dayjs().format("YYYY-MM-DD");
       const record = { message, createdAt };
@@ -194,11 +192,11 @@ export default {
         // .drop()
         .then((data) => {
           state = OPERATION_API_STATE.SUCCEEDED;
-          logger.output("INFO", "$data", data);
+          logger.info("$data", data);
         })
         .catch((error) => {
           state = OPERATION_API_STATE.FAILED;
-          logger.output("ERROR", "$error", error);
+          logger.error("$error", error);
           this.$toast.error(ERROR_STATUS_CODE[error.code] || error.message);
         })
         .finally(() => {
@@ -212,16 +210,17 @@ export default {
     },
 
     watchHandler(value, oldValue) {
-      logger.output("DEBUG", "$noRecords", value, oldValue);
+      logger.debug("$noRecords", value, oldValue);
 
       this.$nextTick(() => {
-        logger.output("DEBUG", "$subtitleDOM", this.$refs.subtitleDOM);
+        logger.debug("$subtitleDOM", this.$refs.subtitleDOM);
       });
     },
 
     onResize() {
-      logger.output("DEBUG", "$screen", window.screen);
-      logger.output("DEBUG", "$breakpoint", this.$vuetify.breakpoint);
+      console.count("$onResize");
+      console.table(window.screen, ["(index)", "Value"]);
+      logger.debug("$breakpoint", this.$vuetify.breakpoint);
     },
   },
 };
