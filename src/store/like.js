@@ -1,8 +1,8 @@
 import {
   DEFAULT_LIKE,
-  GET_LIKE_BY_PK,
-  INCREMENT_LIKE_BY_PK_MUTATION,
-  INCREMENT_LIKE_BY_PK_ACTION,
+  GET_LIKE,
+  UPDATE_LIKE,
+  CHANGE_LIKE,
 } from "@/store/flux-types";
 
 export default {
@@ -15,26 +15,34 @@ export default {
   }),
 
   getters: {
-    [DEFAULT_LIKE]: (state, getters, rootState) => getters[GET_LIKE_BY_PK](1),
-    [GET_LIKE_BY_PK]: (state, getters, rootState) => (pk) =>
-      state.allLikes.find((item) => item.pk === pk),
+    [DEFAULT_LIKE]: (state, getters, rootState, rootGetters) =>
+      getters[GET_LIKE]({ pk: 1 }),
+
+    [GET_LIKE]:
+      (state, getters, rootState, rootGetters) =>
+      ({ pk }) =>
+        state.allLikes.find((item) => item.pk === pk),
   },
 
   mutations: {
-    [INCREMENT_LIKE_BY_PK_MUTATION](state, { pk }) {
-      const like = state.allLikes.find((todo) => todo.pk === pk);
+    [UPDATE_LIKE](state, { pk }) {
+      const like = state.allLikes.find((item) => item.pk === pk);
+
       if (like) like.totalCount += 1;
+      else throw new Error("NotFound: No target found matching the query.");
+
+      return pk;
     },
   },
 
   actions: {
-    async [INCREMENT_LIKE_BY_PK_ACTION](
-      { state, dispatch, commit, rootState },
+    [CHANGE_LIKE](
+      { commit, dispatch, state, getters, rootState, rootGetters },
       { pk }
     ) {
-      await Promise.resolve().then(() =>
-        commit(INCREMENT_LIKE_BY_PK_MUTATION, { pk })
-      );
+      commit(UPDATE_LIKE, { pk });
+
+      return pk;
     },
   },
 

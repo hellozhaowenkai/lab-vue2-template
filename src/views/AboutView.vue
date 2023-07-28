@@ -9,7 +9,7 @@
 
     <v-card class="card" style="margin: auto">
       <v-card-title class="ma-2">
-        <v-badge :content="String(totalCount)">
+        <v-badge :content="String(likeModule.totalCount)">
           {{ websiteTitle }}
         </v-badge>
       </v-card-title>
@@ -78,7 +78,6 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
 import dayjs from "dayjs";
 import { mdiAccountCircle, mdiMessage, mdiSend } from "@mdi/js";
 import LikeButton from "@/components/LikeButton";
@@ -87,9 +86,9 @@ import { ApiLikeModel } from "@/api/lab-django-template";
 import { ERROR_STATUS_CODE, OPERATION_API_STATE } from "@/restful";
 import {
   DEFAULT_LIKE,
-  GET_LIKE_BY_PK,
-  INCREMENT_LIKE_BY_PK_MUTATION,
-  INCREMENT_LIKE_BY_PK_ACTION,
+  GET_LIKE,
+  UPDATE_LIKE,
+  CHANGE_LIKE,
 } from "@/store/flux-types";
 
 export default {
@@ -101,6 +100,7 @@ export default {
     return {
       websiteTitle: this.$projectConfig["base"]["website-title"],
       svgIcon: { mdiAccountCircle, mdiMessage, mdiSend },
+      likePk: 1,
       initLikeStatus: false,
       isLiked: false,
       message: "Hi.",
@@ -113,9 +113,9 @@ export default {
       return this.allRecords.length < 1;
     },
 
-    totalCount() {
-      // return this.$store.getters[GET_LIKE_BY_PK](1).totalCount;
-      return this.$store.getters[DEFAULT_LIKE].totalCount;
+    likeModule() {
+      // return this.$store.getters[GET_LIKE]({ pk: this.likePk });
+      return this.$store.getters[DEFAULT_LIKE];
     },
   },
 
@@ -165,13 +165,13 @@ export default {
       this.isLiked = isLiked;
 
       this.allRecordsPush(isLiked ? "I like it!" : "I don't like it!");
-      this.likeModelChange(1, { lastAddBy: isLiked ? 1 : -1 });
-      if (isLiked) this.likeStoreChange(1);
+      this.likeModelChange(this.likePk, { lastAddBy: isLiked ? 1 : -1 });
+      if (isLiked) this.likeStoreChange(this.likePk);
     },
 
-    likeStoreChange(pk) {
-      // this.$store.commit(INCREMENT_LIKE_BY_PK_MUTATION, { pk });
-      this.$store.dispatch(INCREMENT_LIKE_BY_PK_ACTION, { pk });
+    async likeStoreChange(pk) {
+      // this.$store.commit(UPDATE_LIKE, { pk });
+      await this.$store.dispatch(CHANGE_LIKE, { pk });
     },
 
     async likeModelChange(pk, fields) {
