@@ -39,9 +39,9 @@
                   <tr
                     v-for="(value, key, indexOfObject) in item"
                     :key="indexOfObject"
-                    class="text-left"
+                    :class="['text-left', $style.backgroundColorSlate200]"
                   >
-                    <td>{{ key }}</td>
+                    <td class="table__header-text_font_bold">{{ key }}</td>
                     <td>{{ value }}</td>
                   </tr>
                 </tbody>
@@ -257,3 +257,7 @@ export default {
   opacity: 0;
 }
 </style>
+
+<style scoped lang="scss" src="@/styles/utilities.scss"></style>
+
+<style scoped module lang="scss" src="@/styles/utilities.module.scss"></style>

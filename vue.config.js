@@ -26,7 +26,7 @@ module.exports = defineConfig({
   // By default `babel-loader` ignores all files inside `node_modules`.
   transpileDependencies: ["vuetify"],
   // Setting this to `false` can speed up production builds if you don't need source maps for production.
-  productionSourceMap: true,
+  productionSourceMap: !$isProduction,
   // Configure the `crossorigin` attribute on `<link rel="stylesheet">` and `<script>` tags in generated HTML.
   crossorigin: undefined,
   // Set to `true` to enable `Subresource Integrity` (SRI) on `<link rel="stylesheet">` and `<script>` tags in generated HTML.
@@ -83,7 +83,7 @@ module.exports = defineConfig({
 
   css: {
     extract: $isProduction,
-    sourceMap: true,
+    sourceMap: !$isProduction,
     loaderOptions: {
       // scss: {
       //   additionalData: `@import "~@/variables.scss";`,
