@@ -2,13 +2,13 @@
   <div class="home-view">
     <img alt="Vue Logo" :src="require('@/assets/lfs/vue-logo.png')" />
 
-    <HelloVue message="Welcome to Your Vue.js App" />
+    <HelloVue message="Welcome to Your Vue2 + TypeScript App" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloVue from "@/components/HelloVue.vue";
+import HelloVue from "@/components/HelloVue";
 
 export default {
   name: "HomeView",

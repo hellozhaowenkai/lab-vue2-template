@@ -10,9 +10,9 @@ import HomeView from "@/views/HomeView";
 const AboutView = () =>
   import(/* webpackChunkName: "about-view" */ "@/views/AboutView");
 const AppLayout = () =>
-  import(/* webpackChunkName: "app-layout" */ "@/views/AppLayout.vue");
+  import(/* webpackChunkName: "app-layout" */ "@/views/AppLayout");
 const UiLayout = () =>
-  import(/* webpackChunkName: "ui-layout" */ "@/views/UiLayout.vue");
+  import(/* webpackChunkName: "ui-layout" */ "@/views/UiLayout");
 const HelloVuetify = () =>
   import(/* webpackChunkName: "hello-vuetify" */ "@/components/HelloVuetify");
 const ColorPicker = () =>
@@ -20,7 +20,7 @@ const ColorPicker = () =>
 
 const MePage = () => import(/* webpackChunkName: "me-page" */ "@/views/MePage");
 const NotFoundPage = () =>
-  import(/* webpackChunkName: "not-found-page" */ "@/views/NotFoundPage.vue");
+  import(/* webpackChunkName: "not-found-page" */ "@/views/NotFoundPage");
 
 Vue.use(VueRouter);
 

@@ -3,7 +3,7 @@
     <h1>This is an about page</h1>
 
     <LikeButton
-      :initLikeStatus="initLikeStatus"
+      :initialLikeStatus="initialLikeStatus"
       @likeStatusChange="likeStatusChange"
     />
 
@@ -101,7 +101,7 @@ export default {
       websiteTitle: this.$projectConfig["base"]["website-title"],
       svgIcon: { mdiAccountCircle, mdiMessage, mdiSend },
       likePk: 1,
-      initLikeStatus: false,
+      initialLikeStatus: false,
       isLiked: false,
       message: "Hi.",
       allRecords: [],

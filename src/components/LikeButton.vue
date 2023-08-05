@@ -85,14 +85,14 @@ export default {
   name: "LikeButton",
 
   props: {
-    initLikeStatus: {
+    initialLikeStatus: {
       type: Boolean,
       default: false,
     },
   },
 
   data() {
-    return { isLiked: this.initLikeStatus };
+    return { isLiked: this.initialLikeStatus };
   },
 
   methods: {
