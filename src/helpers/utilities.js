@@ -187,3 +187,92 @@ export function isNull(objectLike) {
 export function isUndefined(objectLike) {
   return getBaseTypeOf(objectLike) === JS_DATA_TYPES.UNDEFINED;
 }
+
+export function getValueByKeyPath(
+  objectLike,
+  keyPath,
+  defaultValue = undefined
+) {
+  const travel = (pattern) =>
+    String.prototype.split
+      .call(keyPath, pattern)
+      .filter(Boolean)
+      .reduce(
+        (result, key) =>
+          result !== null && result !== undefined ? result[key] : result,
+        objectLike
+      );
+  const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/);
+  return result === undefined || result === objectLike ? defaultValue : result;
+}
+
+export function deepCopy(serializableObject, transferableKeys = []) {
+  // return JSON.parse(JSON.stringify(serializableObject));
+
+  return structuredClone(serializableObject, {
+    transfer: transferableKeys.map((key) =>
+      getValueByKeyPath(serializableObject, key)
+    ),
+  });
+}
+
+export function shallowCopy(objectLike) {
+  // return { ...objectLike };
+
+  return Object.create(objectLike);
+}
+
+export function getRandomUuid() {
+  if (typeof crypto === "object") {
+    if (typeof crypto.randomUUID === "function") return crypto.randomUUID();
+
+    if (
+      typeof crypto.getRandomValues === "function" &&
+      typeof Uint8Array === "function"
+    ) {
+      const replacer = (c) => {
+        const n = Number(c);
+        return (
+          n ^
+          (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (n / 4)))
+        ).toString(16);
+      };
+
+      return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, replacer);
+    }
+  }
+
+  let timestamp = new Date().getTime();
+  let performanceNow =
+    (typeof performance !== "undefined" &&
+      performance.now &&
+      performance.now() * 1000) ||
+    0;
+  const replacer = (c) => {
+    let random = Math.random() * 16;
+
+    if (timestamp > 0) {
+      random = (timestamp + random) % 16 | 0;
+      timestamp = Math.floor(timestamp / 16);
+    } else {
+      random = (performanceNow + random) % 16 | 0;
+      performanceNow = Math.floor(performanceNow / 16);
+    }
+
+    return (c === "x" ? random : (random & 0x3) | 0x8).toString(16);
+  };
+
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, replacer);
+}
+
+export function getRandomFloat(a = 1, b = 0) {
+  const lower = Math.min(a, b);
+  const upper = Math.max(a, b);
+  return lower + Math.random() * (upper - lower);
+}
+
+export function getRandomInt(a = 1, b = 0) {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  return Math.floor(lower + Math.random() * (upper - lower + 1));
+}
